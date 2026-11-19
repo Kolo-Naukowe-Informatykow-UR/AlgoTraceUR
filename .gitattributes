@@ -1,0 +1,13 @@
+# Tekst zawsze z końcami linii LF, niezależnie od systemu
+* text=auto eol=lf
+
+# Skrypty Windows potrzebują CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Pliki binarne
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.svg text

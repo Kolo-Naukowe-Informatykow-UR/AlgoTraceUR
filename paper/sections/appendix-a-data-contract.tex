@@ -1,0 +1,12 @@
+\section{Kontrakt danych}
+\label{app:data-contract}
+
+\TODO{skrót formatów z schemas/: konfiguracja eksperymentu, zapis przebiegu, wiersz wyników, wynik analizatora.}
+
+Przykład zdarzenia zapisu przebiegu (format do ustalenia):
+
+\begin{lstlisting}
+{"step": 1, "turn": 1, "tool": "compare", "args": {"i": 0, "j": 1}, "result": -1}
+{"step": 2, "turn": 2, "tool": "compare", "args": {"i": 1, "j": 2}, "result": 1}
+{"step": 3, "turn": 2, "tool": "swap", "args": {"i": 1, "j": 2}, "result": "ok"}
+\end{lstlisting}

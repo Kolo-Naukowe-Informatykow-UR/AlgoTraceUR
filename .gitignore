@@ -1,0 +1,37 @@
+# Sekrety: klucze API tylko w zmiennych środowiskowych
+.env
+.env.*
+!.env.example
+*.key
+secrets/
+
+# System i edytory
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*~
+
+# LaTeX: pliki pośrednie i wynik budowania (paper/)
+paper/build/
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.xdv
+
+# Pliki tymczasowe uruchamiania
+data/**/tmp/
+
+# Wpisy dla wybranych języków programowania dochodzą razem z decyzją o stosie technologicznym.

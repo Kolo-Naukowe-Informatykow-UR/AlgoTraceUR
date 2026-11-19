@@ -1,0 +1,90 @@
+\section{Metoda}
+\label{sec:method}
+
+\subsection{Środowisko}
+\label{sec:environment}
+
+Model nie widzi danych zadania: zmienia i odczytuje ukryty stan tylko przez narzędzia, a każde wywołanie trafia do
+zapisu przebiegu (rys.~\ref{fig:environment}).
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[
+      node distance=6mm and 7mm,
+      box/.style={draw, rounded corners, align=center, font=\small, minimum height=10mm, minimum width=24mm},
+      arr/.style={-{Stealth}, thick},
+      both/.style={{Stealth}-{Stealth}, thick}]
+    \node[box] (gen) {Generator\\zadań};
+    \node[box, right=of gen] (sandbox) {Piaskownica\\(ukryty stan)};
+    \node[box, right=of sandbox] (loop) {Pętla\\tool callingu};
+    \node[box, right=of loop] (model) {Model LLM\\(przez adapter)};
+    \node[box, below=of loop] (trace) {Zapis\\przebiegu};
+    \node[box, left=of trace] (analyzer) {Analizator};
+    \node[box, left=of analyzer] (refs) {Algorytmy\\wzorcowe};
+    \draw[arr] (gen) -- (sandbox);
+    \draw[both] (sandbox) -- (loop);
+    \draw[both] (loop) -- (model);
+    \draw[arr] (loop) -- (trace);
+    \draw[arr] (trace) -- (analyzer);
+    \draw[arr] (refs) -- (analyzer);
+  \end{tikzpicture}
+  \caption{Przepływ danych: wykonanie zadania (góra) i analiza po fakcie (dół).}
+  \label{fig:environment}
+\end{figure}
+
+\TODO{generator z ziarnem, walidacja argumentów, limity, wstrzykiwanie błędów, adaptery dostawców.}
+
+\subsection{Zadania}
+\label{sec:tasks}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Rodziny zadań, narzędzia i granice teoretyczne.}
+  \label{tab:tasks}
+  \small
+  \begin{tabular}{@{}p{2.8cm}p{3.4cm}p{4.2cm}p{3.6cm}@{}}
+    \toprule
+    Zadanie & Narzędzia & Wzorce & Granica \\
+    \midrule
+    Sortowanie $N$ elementów & \tool{compare(i, j)}, \tool{swap(i, j)} & bąbelkowe, przez wstawianie, przez wybór,
+      szybkie, scalanie & $\lceil \log_2 N! \rceil$ porównań \\
+    Wieże Hanoi, $n$ krążków & \tool{move(from, to)} & rekurencyjne & $2^n - 1$ ruchów \\
+    Wyszukiwanie & \tool{read(index)} & binarne, liniowe, interpolacyjne & $\lceil \log_2 (N + 1) \rceil$ odczytów
+      (binarne) \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Rozpoznawanie algorytmu}
+\label{sec:recognition}
+
+\TODO{cechy przebiegu, odtworzenie wzorców na tych samych danych, odległość ciągów operacji, klasyfikacja: znany
+algorytm, hybryda, strategia nowa; walidacja na syntetycznych przebiegach.}
+
+\begin{algorithm}[htbp]
+  \caption{Klasyfikacja przebiegu sortowania (szkic).}
+  \label{alg:classify}
+  \begin{algorithmic}[1]
+    \Require zapis przebiegu $T$, dane wejściowe $x$, warianty wzorców $\mathcal{W}$, próg $\tau$
+    \If{stan końcowy nie jest posortowany}
+      \State \Return błąd i jego rodzaj
+    \EndIf
+    \ForAll{$w \in \mathcal{W}$}
+      \State $d_w \gets$ odległość ciągu operacji $T$ od przebiegu $w(x)$
+    \EndFor
+    \If{$\min_w d_w < \tau$}
+      \State \Return znany algorytm $\arg\min_w d_w$
+    \ElsIf{fragmenty $T$ pasują do różnych wzorców}
+      \State \Return hybryda
+    \Else
+      \State \Return strategia nowa
+    \EndIf
+  \end{algorithmic}
+\end{algorithm}
+
+\subsection{Miary}
+\label{sec:measures}
+
+\TODO{skuteczność; porównania wobec $\lceil \log_2 N! \rceil$ i wzorca, porównania zbędne na grafie relacji
+elementów; zamiany wobec liczby inwersji i $N - c$, gdzie $c$ to liczba cykli permutacji; błędy; zgodność
+deklaracji; tokeny, czas i koszt.}

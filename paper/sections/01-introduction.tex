@@ -1,0 +1,29 @@
+\section{Wstęp}
+\label{sec:introduction}
+
+\TODO{problem: modele językowe działają jako agenci przez wywołania narzędzi, a testy tool callingu oceniają głównie
+poprawność wywołań i wyniku, rzadko to, jak model doszedł do rozwiązania.}
+
+\subsection{Cel badania}
+\label{sec:goal}
+
+\TODO{cel: otwarte środowisko testowe z analizatorem przebiegów i raport, jak skutecznie i jakimi algorytmami modele
+LLM różnych dostawców rozwiązują zadania przez tool calling.}
+
+\subsection{Pytania badawcze}
+\label{sec:questions}
+
+\begin{enumerate}
+  \item \textbf{Skuteczność:} jak odsetek poprawnie rozwiązanych zadań zależy od modelu, dostawcy i rozmiaru
+    zadania $N$?
+  \item \textbf{Algorytm:} jakie algorytmy modele faktycznie wykonują: znane, ich mieszanki czy własne strategie?
+  \item \textbf{Deklaracja a wykonanie:} czy algorytm zapowiedziany w tekście zgadza się z wykonanym?
+  \item \textbf{Efektywność:} ile porównań i zamian zużywa model wobec granic teoretycznych i algorytmów wzorcowych?
+  \item \textbf{Zmiana strategii:} czy model zmienia algorytm, gdy rośnie $N$ albo gdy narzędzie zwróci błąd?
+\end{enumerate}
+
+\subsection{Wkład}
+\label{sec:contribution}
+
+\TODO{co nowego: każdy ruch jako osobne wywołanie narzędzia na ukrytym stanie, rozpoznawanie algorytmu z zapisu
+ruchów, porównanie deklaracji z wykonaniem, gotowe modele wielu dostawców bez trenowania.}

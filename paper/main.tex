@@ -1,0 +1,80 @@
+% AlgoTrace: tekst badania.
+% Budowanie: latexmk w folderze paper/ (ustawienia w .latexmkrc); działa z pdfLaTeX i LuaLaTeX, bibliografia: biber.
+\documentclass[a4paper,11pt]{article}
+
+% ---------- Fonty i kodowanie (pdfLaTeX albo LuaLaTeX) ----------
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{lmodern}
+\else
+  \usepackage{fontspec}
+\fi
+
+% ---------- Język ----------
+% Język główny tekstu: main=polish albo main=english (decyzja zespołu); streszczenia są w obu językach.
+\usepackage[english,main=polish]{babel}
+\usepackage{csquotes}
+
+% ---------- Układ strony i typografia ----------
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{microtype}
+\usepackage{xcolor}
+
+% ---------- Matematyka, tabele, rysunki, algorytmy ----------
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,babel}
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily\small,columns=fullflexible,breaklines=true,frame=single}
+
+% ---------- Bibliografia ----------
+\usepackage[backend=biber,style=numeric,sorting=none,maxbibnames=10]{biblatex}
+\addbibresource{references.bib}
+
+% ---------- Odnośniki (prawie na końcu preambuły) ----------
+\usepackage[hidelinks]{hyperref}
+
+% ---------- Pseudokod (po hyperref) ----------
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\addto\captionspolish{\floatname{algorithm}{Algorytm}}
+
+% ---------- Polecenia projektu ----------
+\newcommand{\TODO}[1]{\textcolor{red}{[TODO: #1]}}
+\newcommand{\tool}[1]{\texttt{#1}}
+
+% ---------- Metadane ----------
+\title{AlgoTrace: jakimi algorytmami modele językowe rozwiązują zadania przez tool calling}
+\author{Zespół projektu AlgoTrace\\
+  Koło Naukowe Informatyków, Uniwersytet Rzeszowski\\
+  \TODO{autorzy i afiliacje}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\input{sections/00-abstract}
+
+\tableofcontents
+
+\input{sections/01-introduction}
+\input{sections/02-related-work}
+\input{sections/03-method}
+\input{sections/04-experiment}
+\input{sections/05-results}
+\input{sections/06-discussion}
+\input{sections/07-conclusion}
+
+\printbibliography
+
+\appendix
+\input{sections/appendix-a-data-contract}
+
+\end{document}
