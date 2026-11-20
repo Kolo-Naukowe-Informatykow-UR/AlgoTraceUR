@@ -34,4 +34,29 @@ paper/build/
 # Pliki tymczasowe uruchamiania
 data/**/tmp/
 
-# Wpisy dla wybranych języków programowania dochodzą razem z decyzją o stosie technologicznym.
+# Języki według docs/decisions/0001-stos-technologiczny.md. Pliki blokady i wersji zostają w repozytorium:
+# uv.lock, .python-version, global.json, packages.lock.json, Directory.Packages.props, wzorce *.verified.*
+# (Verify) i __snapshots__/ (syrupy).
+
+# .NET: wynik budowania, pliki Visual Studio, wyniki testów
+bin/
+obj/
+.vs/
+*.user
+*.suo
+TestResults/
+*.received.*
+
+# Python: pamięć podręczna, środowisko uv, wynik budowania
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.hypothesis/
+*.egg-info/
+/dist/
+.coverage
+htmlcov/
+.ipynb_checkpoints/

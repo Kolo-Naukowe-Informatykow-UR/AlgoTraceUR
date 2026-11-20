@@ -1,0 +1,64 @@
+{
+  "schema_version": "2.0",
+  "run_id": "2821d1679b18acbf",
+  "series_id": "example-pilot-sort",
+  "task": "sort",
+  "n": 5,
+  "instance_id": "sort-n5-example",
+  "analyzer_version": "0.1.0",
+  "created": "2026-11-20T10:00:00.000Z",
+  "calibration_id": null,
+  "token_variant": "full",
+  "trace_length": 18,
+  "metrics": {
+    "compares": 10,
+    "swaps": 8,
+    "redundant_compares": 0,
+    "info_bound_compares": 7,
+    "inversions": 8,
+    "min_swaps": 2,
+    "validation_errors": 0,
+    "recoveries_after_error": 0,
+    "longest_error_streak": 0
+  },
+  "distances": [
+    {
+      "reference": "bubble_sort",
+      "variant": "standard",
+      "distance": 0,
+      "normalized_distance": 0.0,
+      "reference_length": 18
+    },
+    {
+      "reference": "insertion_sort",
+      "variant": "standard",
+      "distance": 8,
+      "normalized_distance": 0.4444,
+      "reference_length": 18
+    },
+    {
+      "reference": "selection_sort",
+      "variant": "standard",
+      "distance": 18,
+      "normalized_distance": 1.0,
+      "reference_length": 12
+    }
+  ],
+  "label": {
+    "text": "known:bubble_sort",
+    "kind": "known",
+    "algorithms": [],
+    "variant": "standard",
+    "subtype": null,
+    "failure_detail": null,
+    "margin": 0.4444
+  },
+  "exploratory_label": null,
+  "segments": [],
+  "declaration": {
+    "text": "I will use bubble sort: compare neighbouring elements from left to right and swap them when they are out of order, repeating the passes until the array is sorted.",
+    "declared_algorithm": "bubble_sort",
+    "labelled_by": "manual",
+    "matches_label": true
+  }
+}

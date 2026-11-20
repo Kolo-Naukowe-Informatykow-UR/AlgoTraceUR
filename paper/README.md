@@ -36,4 +36,8 @@ pakiety są w każdej pełnej dystrybucji: `babel` (polski i angielski), `csquot
 
 ## Licencja
 
-Do ustalenia przez autorów.
+Tekst badania z folderu `paper/`, także rysunki w `figures/`, jest na CC BY 4.0 (`CC-BY-4.0`, tekst prawny:
+https://creativecommons.org/licenses/by/4.0/legalcode): wolno go kopiować, zmieniać i rozpowszechniać pod warunkiem
+uznania autorstwa, podania linku do licencji i oznaczenia zmian.
+
+Jeśli miejsce publikacji referatu wymaga przeniesienia praw albo innej licencji, ta sekcja poda, czego to dotyczy.

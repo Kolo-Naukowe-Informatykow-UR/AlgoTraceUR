@@ -54,12 +54,21 @@ każdy moduł może powstać w innym języku.
 
 Każdy folder ma własne `README.md` z opisem, co do niego należy.
 
+Dla zespołu i agentów kodujących: zasady pracy i kolejność czytania w [AGENTS.md](AGENTS.md), przegląd projektu, plan prac i specyfikacje programów w [docs/README.md](docs/README.md).
+
 ## Stan
 
-Listopad 2026: przygotowanie projektu. Jest szkielet repozytorium i szablon tekstu badania; kodu jeszcze nie ma.
+20.11.2026: projekt gotowy do pisania kodu; kodu programów jeszcze nie ma.
 
-- Ustalone: tekst badania powstaje w LaTeX (`paper/`).
-- Otwarte, do ustalenia w trakcie: języki programowania i frameworki modułów, dostawcy i modele, licencje.
+- Gotowe: projekt badania i zestaw modeli ([docs/project/overview.md](docs/project/overview.md)), plan prac
+  ([docs/project/work-plan.md](docs/project/work-plan.md)), stos technologiczny i licencje
+  ([docs/decisions/](docs/decisions/README.md)), protokół eksperymentu w wersji „przed pilotażem”
+  ([docs/protocol/](docs/protocol/README.md)), kontrakt danych v2 ([schemas/](schemas/README.md)), specyfikacje
+  sześciu programów ([docs/README.md](docs/README.md)), szablon tekstu badania w LaTeX ([paper/](paper/README.md)).
+- Następne: algorytmy wzorcowe (`src/references/`), początek analizatora i adapterów; środowisko bazowe trafia do
+  `src/environment/` po przejęciu (plan prac, sekcja 4).
+- Otwarte: sprawy interfejsów do rozstrzygnięcia przez zespół
+  ([docs/project/open-questions.md](docs/project/open-questions.md)).
 
 ## Zasady
 
@@ -70,4 +79,13 @@ Listopad 2026: przygotowanie projektu. Jest szkielet repozytorium i szablon teks
 
 ## Licencja
 
-Do ustalenia przez autorów (kod, zbiór przebiegów i tekst badania osobno).
+| Część repozytorium | Licencja | Gdzie opis |
+|---|---|---|
+| kod i wszystko poza `data/` i `paper/` (także `docs/`, `schemas/`, `experiments/`) | Apache License 2.0 (`Apache-2.0`) | `LICENSE`, nota w `NOTICE` |
+| zbiór przebiegów: `data/` | CC0 1.0 Universal (`CC0-1.0`) | `data/README.md` |
+| tekst badania: `paper/` | CC BY 4.0 (`CC-BY-4.0`) | `paper/README.md` |
+
+Prawa autorskie mają autorzy (lista w historii Gita); koło może prezentować projekt, ale nie jest właścicielem praw.
+Wkład przesłany do repozytorium jest na licencji części, której dotyczy: kod na Apache-2.0 (tak mówi też § 5 tej
+licencji), wkład do `data/` na CC0 1.0, do `paper/` na CC BY 4.0. Powody wyboru i odrzucone opcje:
+`docs/decisions/0002-licencje.md`.

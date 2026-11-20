@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://algotrace.example/schemas/instance.v2.schema.json",
+  "title": "AlgoTrace task instance v2",
+  "description": "One task instance, one JSON object per line of instances/<series>.jsonl (protocol design.md, section 3). Generated once before a stage of the study, one file per stage; the environment, the reference algorithms and the analyzer read the same file, so no module has to repeat a random generator. Lines in the order task (sort, hanoi, search), n ascending, rep ascending.",
+  "type": "object",
+  "properties": {
+    "schema_version": { "$ref": "common.v2.schema.json#/$defs/schema_version" },
+    "instance_id": {
+      "description": "Unique in the file, e.g. sort-n10-r03.",
+      "$ref": "common.v2.schema.json#/$defs/slug"
+    },
+    "series": {
+      "description": "Stage the file belongs to; every configuration of the stage reads the same file.",
+      "$ref": "common.v2.schema.json#/$defs/series"
+    },
+    "idx": {
+      "description": "Number of the line in the file from 0; seed = base_seed + idx and fault_seed = base_fault_seed + idx.",
+      "$ref": "common.v2.schema.json#/$defs/non_negative_integer"
+    },
+    "task": { "$ref": "common.v2.schema.json#/$defs/task" },
+    "n": {
+      "description": "Size (size of the protocol): array length (sort, search) or number of disks (hanoi).",
+      "type": "integer",
+      "minimum": 1
+    },
+    "rep": {
+      "description": "Repetition of the cell (task, n) from 0: every repetition has its own instance (for Hanoi the same content with another instance_id).",
+      "$ref": "common.v2.schema.json#/$defs/non_negative_integer"
+    },
+    "seed": {
+      "description": "Seed the instance was generated from (base_seed + idx); null for a hand-made instance.",
+      "type": ["integer", "null"],
+      "minimum": 0
+    },
+    "generator": {
+      "description": "Generator name, version (generator_version of the protocol) and base seeds, the same in every generated line of a file; null for a hand-made instance. The state below, not the seed, is the instance.",
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string", "minLength": 1 },
+            "version": { "type": "string", "minLength": 1 },
+            "base_seed": { "type": "integer", "minimum": 0 },
+            "base_fault_seed": {
+              "description": "Base of the fault schedules, different from base_seed; null when the file has no cell with faults.",
+              "type": ["integer", "null"],
+              "minimum": 0
+            }
+          },
+          "required": ["name", "version", "base_seed", "base_fault_seed"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "initial_state": {
+      "description": "Initial hidden state; in search it holds the target (target of the protocol).",
+      "$ref": "common.v2.schema.json#/$defs/state"
+    },
+    "target_present": {
+      "description": "Search: the target is in the array; null for other tasks.",
+      "type": ["boolean", "null"]
+    },
+    "answer": {
+      "description": "Search: the reference answer, the position of the target or -1; null for other tasks.",
+      "type": ["integer", "null"],
+      "minimum": -1
+    },
+    "fault_schedule": {
+      "description": "Schedule of the injected fault for a cell of the condition faults (sort N = 10, Hanoi n = 4 in the protocol); null for other lines.",
+      "oneOf": [
+        { "type": "null" },
+        { "$ref": "common.v2.schema.json#/$defs/fault_schedule" }
+      ]
+    },
+    "checks": {
+      "description": "Checks of solvability and correctness written by the generator (protocol design.md, section 3); a series does not start when failed is not empty. permutation = the values are 1..N, not_sorted = the array is not sorted, hanoi_start = n disks on peg 0, strictly_increasing = the search array grows strictly, target_present and answer agree with the array. null for a hand-made instance.",
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "properties": {
+            "checked": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/check" },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "failed": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/check" },
+              "uniqueItems": true
+            }
+          },
+          "required": ["checked", "failed"],
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "required": ["schema_version", "instance_id", "series", "idx", "task", "n", "rep", "seed", "generator", "initial_state", "target_present", "answer", "fault_schedule", "checks"],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": { "properties": { "task": { "const": "sort" } } },
+      "then": { "properties": { "initial_state": { "$ref": "common.v2.schema.json#/$defs/sort_state" }, "target_present": { "type": "null" }, "answer": { "type": "null" } } }
+    },
+    {
+      "if": { "properties": { "task": { "const": "hanoi" } } },
+      "then": { "properties": { "initial_state": { "$ref": "common.v2.schema.json#/$defs/hanoi_state" }, "target_present": { "type": "null" }, "answer": { "type": "null" } } }
+    },
+    {
+      "if": { "properties": { "task": { "const": "search" } } },
+      "then": { "properties": { "initial_state": { "$ref": "common.v2.schema.json#/$defs/search_state" }, "target_present": { "type": "boolean" }, "answer": { "type": "integer" } } }
+    },
+    {
+      "description": "A generated instance has its seed and its checks, a hand-made one neither.",
+      "if": { "properties": { "generator": { "type": "null" } } },
+      "then": { "properties": { "seed": { "type": "null" }, "checks": { "type": "null" } } },
+      "else": { "properties": { "seed": { "type": "integer" }, "checks": { "type": "object" } } }
+    }
+  ],
+  "$defs": {
+    "check": {
+      "enum": ["permutation", "not_sorted", "hanoi_start", "strictly_increasing", "target_present", "answer"]
+    }
+  }
+}

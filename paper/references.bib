@@ -1,45 +1,1226 @@
-% Bibliografia tekstu badania (biblatex + biber).
-% Cztery prace sprawdzone na arXiv w październiku i listopadzie 2026 r.; pełne listy autorów i tytuły do potwierdzenia
-% przy przeglądzie literatury, zanim tekst pójdzie do recenzji.
+% Bibliografia tekstu badania AlgoTrace.
+% Zgodna z BibTeX (szablon ACL: acl_natbib.bst czyta eprint, archivePrefix, doi i url) i z biblatex + Biber
+% (archivePrefix i primaryClass to aliasy eprinttype i eprintclass). Znaki diakrytyczne jako polecenia LaTeX.
+% Wersja opublikowana: typ inproceedings lub article z DOI, jeśli jest; preprint: typ misc z eprint (arXiv).
+% Dane sprawdzone 19-20.11.2026 na stronach abs arXiv, w Crossref, PMLR, NeurIPS, IJCAI i CEUR-WS (przegląd
+% literatury przed startem projektu). Prace, których miejsca publikacji nie potwierdzono, są preprintami.
 
-@misc{shojaee2025illusion,
-  author     = {Shojaee, P. and Mirzadeh, I. and Alizadeh, K. and Horton, M. and Bengio, S. and Farajtabar, M.},
-  title      = {The Illusion of Thinking: Understanding the Strengths and Limitations of Reasoning Models via the
-                Lens of Problem Complexity},
-  year       = {2025},
-  eprint     = {2506.06941},
-  eprinttype = {arxiv},
-  note       = {NeurIPS 2025},
-  url        = {https://arxiv.org/abs/2506.06941},
+% ====================================================================================================
+% Tło: łamigłówki, spór o rozumowanie i odpowiedzi na pracę Apple
+% ====================================================================================================
+
+% Dodatek A.1 („Response to Main Criticisms”) jest w v2 i v3 arXiv; cytując go, podać arXiv v3.
+@inproceedings{shojaee2025illusion,
+  author        = {Shojaee, Parshin and Mirzadeh, Iman and Alizadeh, Keivan and Horton, Maxwell and Bengio, Samy and Farajtabar, Mehrdad},
+  title         = {The Illusion of Thinking: Understanding the Strengths and Limitations of Reasoning Models via the Lens of Problem Complexity},
+  booktitle     = {Advances in Neural Information Processing Systems},
+  volume        = {38},
+  pages         = {108018--108059},
+  publisher     = {Curran Associates, Inc.},
+  year          = {2025},
+  doi           = {10.52202/085713-3603},
+  eprint        = {2506.06941},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://proceedings.neurips.cc/paper_files/paper/2025/hash/9b26ad15462c81548c0689188d2e8018-Abstract-Conference.html},
 }
 
-% Lista autorów do sprawdzenia na arXiv.
+% v2 (16.06.2025) ma jednego autora; v1 wymieniała też „C. Opus” (model Claude Opus), usuniętego zgodnie z zasadami arXiv. Nagłówek treści: „The Illusion of the Illusion of Thinking”.
 @misc{lawsen2025comment,
-  author     = {Lawsen, A.},
-  title      = {Comment on The Illusion of Thinking: Understanding the Strengths and Limitations of Reasoning
-                Models via the Lens of Problem Complexity},
-  year       = {2025},
-  eprint     = {2506.09250},
-  eprinttype = {arxiv},
-  url        = {https://arxiv.org/abs/2506.09250},
+  author        = {Lawsen, Alex},
+  title         = {Comment on The Illusion of Thinking: Understanding the Strengths and Limitations of Reasoning Models via the Lens of Problem Complexity},
+  year          = {2025},
+  eprint        = {2506.09250},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2506.09250},
 }
 
-% Podtytuł do sprawdzenia na arXiv.
+% Zgłoszenie ICLR 2026 wycofane (OpenReview RxIBw0r4BA); cytować jako preprint.
 @misc{song2025thinking,
-  author     = {Song, Z. and Yue, S. and Zhang, J.},
-  title      = {Thinking Isn't an Illusion: Overcoming the Limitations of Reasoning Models via Tool Augmentations},
-  year       = {2025},
-  eprint     = {2507.17699},
-  eprinttype = {arxiv},
-  url        = {https://arxiv.org/abs/2507.17699},
+  author        = {Song, Zhao and Yue, Song and Zhang, Jiahao},
+  title         = {Thinking Isn't an Illusion: Overcoming the Limitations of Reasoning Models via Tool Augmentations},
+  year          = {2025},
+  eprint        = {2507.17699},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2507.17699},
 }
 
-% Pełna lista autorów do uzupełnienia.
+@misc{khan2025comment,
+  author        = {Khan, Sheraz and Madhavan, Subha and Natarajan, Kannan},
+  title         = {A Comment On ``The Illusion of Thinking'': Reframing the Reasoning Cliff as an Agentic Gap},
+  year          = {2025},
+  eprint        = {2506.18957},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2506.18957},
+}
+
+% Semantic Scholar wiąże pracę z SGAI 2025 (DBLP conf/sgai/VarelaRRC25, s. 116-129); tom niesprawdzony, więc preprint.
+@misc{varela2025rethinking,
+  author        = {{Dellibarda Varela}, I{\~n}aki and Romero-Sorozabal, Pablo and Rocon, Eduardo and Cebrian, Manuel},
+  title         = {Rethinking the Illusion of Thinking},
+  year          = {2025},
+  eprint        = {2507.01231},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2507.01231},
+}
+
+@misc{su2025limits,
+  author        = {Su, Chris and Li, Harrison and Marques, Matheus and Flint, George and Zhu, Kevin and Dev, Sunishchal},
+  title         = {Limits of Emergent Reasoning of Large Language Models in Agentic Frameworks for Deterministic Games},
+  year          = {2025},
+  eprint        = {2510.15974},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2510.15974},
+}
+
+@misc{pereira2026transformers,
+  author        = {Pereira, Devin and Zuidema, Willem},
+  title         = {Transformers Struggle to Use Their Emergent World Models: Revisiting the {Tower} of {Hanoi}, and the Illusion of Thinking},
+  year          = {2026},
+  eprint        = {2608.07077},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2608.07077},
+}
+
+@misc{meyerson2025solving,
+  author        = {Meyerson, Elliot and Paolo, Giuseppe and Dailey, Roberto and Shahrzad, Hormoz and Francon, Olivier and Hayes, Conor F. and Qiu, Xin and Hodjat, Babak and Miikkulainen, Risto},
+  title         = {Solving a {Million-Step} {LLM} Task with Zero Errors},
+  year          = {2025},
+  eprint        = {2511.09030},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2511.09030},
+}
+
+@misc{utsho2026empirical,
+  author        = {Utsho, Md. Fahad Ullah and Ameen, Mohd. Ruhul and Islam, Akif and Rashed, Md. Golam and Das, Dipankar},
+  title         = {Empirical Evidence of {Complexity-Induced} Limits in Large Language Models on Finite Discrete {State-Space} Problems with Explicit Validity Constraints},
+  year          = {2026},
+  eprint        = {2604.13371},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2604.13371},
+}
+
+@misc{schepanowski2025limits,
+  author        = {Schepanowski, Charles and Ling, Charles},
+  title         = {On the Limits of Innate Planning in Large Language Models},
+  year          = {2025},
+  eprint        = {2511.21591},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2511.21591},
+}
+
+@misc{cheng2026verifiable,
+  author        = {Cheng, Yezhou and Ling, Charles},
+  title         = {Verifiable Efficiency Limits of Innate {LLM} Planning in Sliding Puzzles},
+  year          = {2026},
+  eprint        = {2610.36415},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2610.36415},
+}
+
+@misc{mannem2026recurrent,
+  author        = {Mannem, Gowrav and Mahjabin, Chowdhury Marzia and Chen, Jason and Garg, Shivank and Zhu, Kevin},
+  title         = {Recurrent Reasoning on Symbolic Puzzles with Sequence Models},
+  year          = {2026},
+  eprint        = {2606.15686},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2606.15686},
+}
+
+% ====================================================================================================
+% Najbliższe prace: działanie przez narzędzia na ukrytym stanie, sortowanie, efektywność
+% ====================================================================================================
+
+% Zgłoszenie ICLR 2026 niezaakceptowane (OpenReview H8qm5rqGZY, sprawdzone 20.11.2026); cytować jako preprint.
 @misc{yue2025earl,
-  author     = {Yue, Z. and others},
-  title      = {Expanding the Action Space of {LLMs} to Reason Beyond Language},
-  year       = {2025},
-  eprint     = {2510.07581},
-  eprinttype = {arxiv},
-  url        = {https://arxiv.org/abs/2510.07581},
+  author        = {Yue, Zhongqi and Wang, Weishi and Zhan, Yundaichuan and Li, Juncheng and Dahlmeier, Daniel and Johansson, Fredrik D.},
+  title         = {Expanding the Action Space of {LLMs} to Reason Beyond Language},
+  year          = {2025},
+  eprint        = {2510.07581},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG},
+  url           = {https://arxiv.org/abs/2510.07581},
+}
+
+@misc{zhao2026zebraarena,
+  author        = {Zhao, Wanjia and Schmidt, Ludwig and Choi, Yejin and Zou, James and Balachandran, Vidhisha and Chen, Lingjiao},
+  title         = {{ZEBRAARENA}: A Diagnostic Simulation Environment for Studying {Reasoning-Action} Coupling in {Tool-Augmented} {LLMs}},
+  year          = {2026},
+  eprint        = {2603.18614},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2603.18614},
+}
+
+% Zgłoszenie ICLR 2027 w recenzji (OpenReview ACYrnIY5MU, 20.11.2026); na razie preprint.
+@misc{menaged2026agents,
+  author        = {Menaged, Reef and Lior, Gili and Ravfogel, Shauli and Aharoni, Roee and Stanovsky, Gabriel},
+  title         = {Can Agents Infer Environment from Interaction? Evidence from Agentic Automata Learning},
+  year          = {2026},
+  eprint        = {2606.16576},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2606.16576},
+}
+
+@inproceedings{maekawa2026towards,
+  author        = {Maekawa, Seiji and Hassell, Jackson and Pezeshkpour, Pouya and Mitchell, Tom and Hruschka, Estevam},
+  title         = {Towards Reliable Benchmarking: A Contamination Free, Controllable Evaluation Framework for Multi-step {LLM} Function Calling},
+  booktitle     = {International Conference on Learning Representations (ICLR 2026)},
+  year          = {2026},
+  eprint        = {2509.26553},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2509.26553},
+}
+
+@misc{einarsson2025mazeeval,
+  author        = {Einarsson, Hafsteinn},
+  title         = {{MazeEval}: A Benchmark for Testing Sequential {Decision-Making} in Language Models},
+  year          = {2025},
+  eprint        = {2507.20395},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2507.20395},
+}
+
+@article{yang2025aqabench,
+  author        = {Yang, Siwei and Zhao, Bingchen and Xie, Cihang},
+  title         = {{AQA-Bench}: An Interactive Benchmark for Evaluating {LLMs}' Sequential Reasoning Ability in Algorithmic Environments},
+  journal       = {Transactions on Machine Learning Research},
+  year          = {2025},
+  eprint        = {2402.09404},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2402.09404},
+}
+
+@inproceedings{li2026interactbench,
+  author        = {Li, Jiaze and Shen, Aocheng and Liu, Bing and Zhang, Boyu and Fan, Xiaoxuan and Zhang, Qiankun and Deng, Xianjun},
+  title         = {{InteractBench}: Benchmarking {LLMs} on Competitive Programming under Unrevealed Information},
+  booktitle     = {International Conference on Machine Learning (ICML 2026)},
+  year          = {2026},
+  eprint        = {2608.29632},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.SE},
+  url           = {https://arxiv.org/abs/2608.29632},
+}
+
+@misc{xu2026algoworlds,
+  author        = {Xu, Zixiang and Wang, Jiaan and Meng, Fandong},
+  title         = {{AlgoWorlds}: Benchmarking Tool Use for Global Optimization in Algorithmic Worlds},
+  year          = {2026},
+  eprint        = {2608.29397},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2608.29397},
+}
+
+@misc{xu2026prime,
+  author        = {Xu, Jiawei and Yu, Zhenyu and Bi, Ziqian and Pham, Minh Duc and Qu, Xiaoyi and Zhang, Danyang},
+  title         = {{PRIME}: {Policy-Reinforced} Iterative Multi-agent Execution for Algorithmic Reasoning in Large Language Models},
+  year          = {2026},
+  eprint        = {2602.11170},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2602.11170},
+}
+
+@misc{herbold2025sortbench,
+  author        = {Herbold, Steffen},
+  title         = {{SortBench}: Benchmarking {LLMs} based on their ability to sort lists},
+  year          = {2025},
+  eprint        = {2504.08312},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG},
+  url           = {https://arxiv.org/abs/2504.08312},
+}
+
+@misc{lall2025verbalized,
+  author        = {Lall, Supriya and Farrell, Christian and Pathanjaly, Hari and Pavic, Marko and Chezhian, Sarvesh and Asai, Masataro},
+  title         = {Verbalized Algorithms: Classical Algorithms are All You Need (Mostly)},
+  year          = {2025},
+  note          = {NeurIPS 2025 Workshop on Efficient Reasoning},
+  eprint        = {2509.08150},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2509.08150},
+}
+
+@misc{zhan2026dyad,
+  author        = {Zhan, Yundaichuan and Wang, Weishi and Liu, Wenbiao and Dahlmeier, Daniel and Qin, Chengwei and Li, Juncheng and Johansson, Fredrik D. and Yue, Zhongqi},
+  title         = {Dyad: Extending Large Language Models with Native Typed {Decision-Making}},
+  year          = {2026},
+  eprint        = {2609.36116},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG},
+  url           = {https://arxiv.org/abs/2609.36116},
+}
+
+@misc{anand2026structurally,
+  author        = {Anand, Shereen and Wang, Ju and Du, Yali},
+  title         = {What Structurally Breaks an Agent? Auditing Difficulty in Stateful {Tool-Use} Workflows},
+  year          = {2026},
+  eprint        = {2611.03227},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG},
+  url           = {https://arxiv.org/abs/2611.03227},
+}
+
+@misc{xu2026odysseyarena,
+  author        = {Xu, Fangzhi and Yan, Hang and Sun, Qiushi and Wu, Jinyang and Huang, Zixian and Huang, Muye and Gong, Jingyang and Ding, Zichen and Cheng, Kanzhi and Wang, Yian and Che, Xinyu and Sun, Zeyi and Zhang, Jian and Yin, Zhangyue and Luo, Haoran and Kao, Ben and Lin, Qika},
+  title         = {{OdysseyArena}: Benchmarking Large Language Models For {Long-Horizon}, Active and Inductive Interactions},
+  year          = {2026},
+  eprint        = {2602.05843},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2602.05843},
+}
+
+@misc{toh2026scrambletoolbench,
+  author        = {Toh, Vernon and Majumder, Navonil and Liu, Zhengyuan and Chen, Nancy F. and Poria, Soujanya},
+  title         = {{ScrambleToolBench}: Agents Search Exhaustively Even When Their Own Map Points to the Next Step},
+  year          = {2026},
+  eprint        = {2608.02358},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2608.02358},
+}
+
+@misc{yang2026agentcebench,
+  author        = {Yang, Wang and Song, Chaoda and Li, Xinpeng and Ganguly, Debargha and Ma, Chuang and Wang, Shouren and Dou, Zhihao and Zhou, Yuli and Chaudhary, Vipin and Han, Xiaotian},
+  title         = {{AgentCE-Bench}: Agent Configurable Evaluation with Scalable Horizons and Controllable Difficulty under Lightweight Environments},
+  year          = {2026},
+  eprint        = {2604.06111},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2604.06111},
+}
+
+@misc{pezeshkpour2026task,
+  author        = {Pezeshkpour, Pouya and Hruschka, Estevam},
+  title         = {From Task Solving to Robust {Real-World} Adaptation in {LLM} Agents},
+  year          = {2026},
+  eprint        = {2602.02760},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2602.02760},
+}
+
+@misc{malach2025infinity,
+  author        = {Malach, Eran and Saremi, Omid and Williamson, Sinead and Bradley, Arwen and Lotfi, Aryo and Abbe, Emmanuel and Susskind, Josh and Littwin, Etai},
+  title         = {To Infinity and Beyond: {Tool-Use} Unlocks Length Generalization in State Space Models},
+  year          = {2025},
+  eprint        = {2510.14826},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG},
+  url           = {https://arxiv.org/abs/2510.14826},
+}
+
+% ====================================================================================================
+% Benchmarki tool callingu i agentów
+% ====================================================================================================
+
+@inproceedings{patil2025berkeley,
+  author        = {Patil, Shishir G. and Mao, Huanzhi and Yan, Fanjia and Ji, Charlie Cheng-Jie and Suresh, Vishnu and Stoica, Ion and Gonzalez, Joseph E.},
+  title         = {The {Berkeley} Function Calling Leaderboard ({BFCL}): From Tool Use to Agentic Evaluation of Large Language Models},
+  booktitle     = {Proceedings of the 42nd International Conference on Machine Learning},
+  series        = {Proceedings of Machine Learning Research},
+  volume        = {267},
+  pages         = {48371--48392},
+  publisher     = {PMLR},
+  year          = {2025},
+  url           = {https://proceedings.mlr.press/v267/patil25a.html},
+}
+
+@misc{yao2024taubench,
+  author        = {Yao, Shunyu and Shinn, Noah and Razavi, Pedram and Narasimhan, Karthik},
+  title         = {{$\tau$-bench}: A Benchmark for {Tool-Agent-User} Interaction in {Real-World} Domains},
+  year          = {2024},
+  eprint        = {2406.12045},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2406.12045},
+}
+
+@misc{barres2025tau2bench,
+  author        = {Barres, Victor and Dong, Honghua and Ray, Soham and Si, Xujie and Narasimhan, Karthik},
+  title         = {{$\tau^2$-Bench}: Evaluating Conversational Agents in a {Dual-Control} Environment},
+  year          = {2025},
+  eprint        = {2506.07982},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2506.07982},
+}
+
+% Wersja opublikowana podaje autora „Haoping Bai”, arXiv „Felix Bai”.
+@inproceedings{lu2025toolsandbox,
+  author        = {Lu, Jiarui and Holleis, Thomas and Zhang, Yizhe and Aumayer, Bernhard and Nan, Feng and Bai, Haoping and Ma, Shuang and Ma, Shen and Li, Mengyu and Yin, Guoli and Wang, Zirui and Pang, Ruoming},
+  title         = {{ToolSandbox}: A Stateful, Conversational, Interactive Evaluation Benchmark for {LLM} Tool Use Capabilities},
+  booktitle     = {Findings of the Association for Computational Linguistics: NAACL 2025},
+  pages         = {1160--1183},
+  publisher     = {Association for Computational Linguistics},
+  year          = {2025},
+  doi           = {10.18653/v1/2025.findings-naacl.65},
+}
+
+@inproceedings{liu2024agentbench,
+  author        = {Liu, Xiao and Yu, Hao and Zhang, Hanchen and Xu, Yifan and Lei, Xuanyu and Lai, Hanyu and Gu, Yu and Ding, Hangliang and Men, Kaiwen and Yang, Kejuan and Zhang, Shudan and Deng, Xiang and Zeng, Aohan and Du, Zhengxiao and Zhang, Chenhui and Shen, Sheng and Zhang, Tianjun and Su, Yu and Sun, Huan and Huang, Minlie and Dong, Yuxiao and Tang, Jie},
+  title         = {{AgentBench}: Evaluating {LLMs} as Agents},
+  booktitle     = {International Conference on Learning Representations (ICLR 2024)},
+  year          = {2024},
+  eprint        = {2308.03688},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2308.03688},
+}
+
+@inproceedings{li2023apibank,
+  author        = {Li, Minghao and Zhao, Yingxiu and Yu, Bowen and Song, Feifan and Li, Hangyu and Yu, Haiyang and Li, Zhoujun and Huang, Fei and Li, Yongbin},
+  title         = {{API-Bank}: A Comprehensive Benchmark for {Tool-Augmented} {LLMs}},
+  booktitle     = {Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing},
+  pages         = {3102--3116},
+  publisher     = {Association for Computational Linguistics},
+  year          = {2023},
+  doi           = {10.18653/v1/2023.emnlp-main.187},
+}
+
+@inproceedings{qin2024toolllm,
+  author        = {Qin, Yujia and Liang, Shihao and Ye, Yining and Zhu, Kunlun and Yan, Lan and Lu, Yaxi and Lin, Yankai and Cong, Xin and Tang, Xiangru and Qian, Bill and Zhao, Sihan and Hong, Lauren and Tian, Runchu and Xie, Ruobing and Zhou, Jie and Gerstein, Mark and Li, Dahai and Liu, Zhiyuan and Sun, Maosong},
+  title         = {{ToolLLM}: Facilitating Large Language Models to Master 16000+ Real-world {APIs}},
+  booktitle     = {International Conference on Learning Representations (ICLR 2024)},
+  year          = {2024},
+  eprint        = {2307.16789},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2307.16789},
+}
+
+@misc{guo2024stabletoolbench,
+  author        = {Guo, Zhicheng and Cheng, Sijie and Wang, Hao and Liang, Shihao and Qin, Yujia and Li, Peng and Liu, Zhiyuan and Sun, Maosong and Liu, Yang},
+  title         = {{StableToolBench}: Towards Stable {Large-Scale} Benchmarking on Tool Learning of Large Language Models},
+  year          = {2024},
+  eprint        = {2403.07714},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2403.07714},
+}
+
+@misc{basu2024nestful,
+  author        = {Basu, Kinjal and Abdelaziz, Ibrahim and Kate, Kiran and Agarwal, Mayank and Crouse, Maxwell and Rizk, Yara and Bradford, Kelsey and Munawar, Asim and Kumaravel, Sadhana and Goyal, Saurabh and Wang, Xin and Lastras, Luis A. and Kapanipathi, Pavan},
+  title         = {{NESTFUL}: A Benchmark for Evaluating {LLMs} on Nested Sequences of {API} Calls},
+  year          = {2024},
+  eprint        = {2409.03797},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2409.03797},
+}
+
+@inproceedings{chen2024teval,
+  author        = {Chen, Zehui and Du, Weihua and Zhang, Wenwei and Liu, Kuikun and Liu, Jiangning and Zheng, Miao and Zhuo, Jingming and Zhang, Songyang and Lin, Dahua and Chen, Kai and Zhao, Feng},
+  title         = {{T-Eval}: Evaluating the Tool Utilization Capability of Large Language Models Step by Step},
+  booktitle     = {Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  pages         = {9510--9529},
+  publisher     = {Association for Computational Linguistics},
+  year          = {2024},
+  doi           = {10.18653/v1/2024.acl-long.515},
+}
+
+@inproceedings{ma2024agentboard,
+  author        = {Ma, Chang and Zhang, Junlei and Zhu, Zhihao and Yang, Cheng and Yang, Yujiu and Jin, Yaohui and Lan, Zhenzhong and Kong, Lingpeng and He, Junxian},
+  title         = {{AgentBoard}: An Analytical Evaluation Board of Multi-turn {LLM} Agents},
+  booktitle     = {Advances in Neural Information Processing Systems},
+  volume        = {37},
+  year          = {2024},
+  eprint        = {2401.13178},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2401.13178},
+}
+
+@inproceedings{wang2026mcpbench,
+  author        = {Wang, Zhenting and Chang, Qi and Patel, Hemani and Biju, Shashank and Wu, Cheng-En and Liu, Quan and Ding, Aolin and Rezazadeh, Alireza and Shah, Ankit and Bao, Yujia and Siow, Eugene},
+  title         = {{MCP-Bench}: Benchmarking {Tool-Using} {LLM} Agents with Complex {Real-World} Tasks via {MCP} Servers},
+  booktitle     = {International Conference on Learning Representations (ICLR 2026)},
+  year          = {2026},
+  eprint        = {2508.20453},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2508.20453},
+}
+
+@inproceedings{wu2026mcpmark,
+  author        = {Wu, Zijian and Liu, Xiangyan and Zhang, Xinyuan and Chen, Lingjun and Meng, Fanqing and Du, Lingxiao and Zhao, Yiran and Zhang, Fanshi and Ye, Yaoqi and Wang, Jiawei and Wang, Zirui and Ni, Jinjie and Yang, Yufan and Xu, Arvin and Shieh, Michael Qizhe},
+  title         = {{MCPMark}: A Benchmark for {Stress-Testing} Realistic and Comprehensive {MCP} Use},
+  booktitle     = {International Conference on Learning Representations (ICLR 2026)},
+  year          = {2026},
+  eprint        = {2509.24002},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2509.24002},
+}
+
+% Zgłoszenie ICLR 2026 niezaakceptowane; plakat na warsztacie SEA przy NeurIPS 2025 (OpenReview, 20.11.2026).
+@misc{luo2025mcpuniverse,
+  author        = {Luo, Ziyang and Shen, Zhiqi and Yang, Wenzhuo and Zhao, Zirui and Jwalapuram, Prathyusha and Saha, Amrita and Sahoo, Doyen and Savarese, Silvio and Xiong, Caiming and Li, Junnan},
+  title         = {{MCP-Universe}: Benchmarking Large Language Models with {Real-World} Model Context Protocol Servers},
+  year          = {2025},
+  note          = {SEA Workshop at NeurIPS 2025},
+  eprint        = {2508.14704},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2508.14704},
+}
+
+@misc{fan2025mcptoolbench,
+  author        = {Fan, Shiqing and Ding, Xichen and Zhang, Liang and Mo, Linjian},
+  title         = {{MCPToolBench++}: A Large Scale {AI} Agent Model Context Protocol {MCP} Tool Use Benchmark},
+  year          = {2025},
+  eprint        = {2508.07575},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2508.07575},
+}
+
+@inproceedings{mo2026livemcpbench,
+  author        = {Mo, Guozhao and Zhong, Wenliang and Chen, Jiawei and Yuan, Qianhao and Chen, Xuanang and Lu, Yaojie and Lin, Hongyu and He, Ben and Han, Xianpei and Sun, Le},
+  title         = {{LiveMCPBench}: Can Agents Navigate an Ocean of {MCP} Tools?},
+  booktitle     = {Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.2},
+  pages         = {9581--9592},
+  publisher     = {ACM},
+  year          = {2026},
+  doi           = {10.1145/3770855.3817478},
+}
+
+@misc{guo2025mcpagentbench,
+  author        = {Guo, Zikang and Xu, Benfeng and Zhu, Chiwei and Hong, Wentao and Wang, Xiaorui and Mao, Zhendong},
+  title         = {{MCP-AgentBench}: Evaluating {Real-World} Language Agent Performance with {MCP-Mediated} Tools},
+  year          = {2025},
+  eprint        = {2509.09734},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2509.09734},
+}
+
+@inproceedings{li2026toolathlon,
+  author        = {Li, Junlong and Zhao, Wenshuo and Zhao, Jian and Zeng, Weihao and Wu, Haoze and Wang, Xiaochen and Ge, Rui and Cao, Yuxuan and Huang, Yuzhen and Liu, Wei and Liu, Junteng and Su, Zhaochen and Guo, Yiyang and Zhou, Fan and Zhang, Lueyang and Michelini, Juan and Wang, Xingyao and Yue, Xiang and Zhou, Shuyan and Neubig, Graham and He, Junxian},
+  title         = {The Tool Decathlon: Benchmarking Language Agents for Diverse, Realistic, and {Long-Horizon} Task Execution},
+  booktitle     = {International Conference on Learning Representations (ICLR 2026)},
+  year          = {2026},
+  eprint        = {2510.25726},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2510.25726},
+}
+
+@inproceedings{paglieri2025balrog,
+  author        = {Paglieri, Davide and Cupia{\l}, Bart{\l}omiej and Coward, Samuel and Piterbarg, Ulyana and Wolczyk, Maciej and Khan, Akbir and Pignatelli, Eduardo and Kuci{\'n}ski, {\L}ukasz and Pinto, Lerrel and Fergus, Rob and Foerster, Jakob Nicolaus and Parker-Holder, Jack and Rockt{\"a}schel, Tim},
+  title         = {{BALROG}: Benchmarking Agentic {LLM} and {VLM} Reasoning On Games},
+  booktitle     = {International Conference on Learning Representations (ICLR 2025)},
+  year          = {2025},
+  eprint        = {2411.13543},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2411.13543},
+}
+
+% ====================================================================================================
+% Ocena trajektorii agentów
+% ====================================================================================================
+
+@inproceedings{kim2026beyond,
+  author        = {Kim, Wonjoong and Park, Sangwu and In, Yeonjun and Kim, Sein and Lee, Dongha and Park, Chanyoung},
+  title         = {Beyond the Final Answer: Evaluating the Reasoning Trajectories of {Tool-Augmented} Agents},
+  booktitle     = {International Conference on Machine Learning (ICML 2026)},
+  year          = {2026},
+  eprint        = {2510.02837},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2510.02837},
+}
+
+@inproceedings{he2026trajectbench,
+  author        = {He, Pengfei and Dai, Zhenwei and He, Bing and Liu, Hui and Tang, Xianfeng and Lu, Hanqing and Li, Juanhui and Ding, Jiayuan and Mukherjee, Subhabrata and Wang, Suhang and Xing, Yue and Tang, Jiliang and Dumoulin, Benoit},
+  title         = {{TRAJECT-Bench}: A {Trajectory-Aware} Benchmark for Evaluating Agentic Tool Use},
+  booktitle     = {International Conference on Learning Representations (ICLR 2026)},
+  year          = {2026},
+  eprint        = {2510.04550},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2510.04550},
+}
+
+@misc{liu2025costbench,
+  author        = {Liu, Jiayu and Qian, Cheng and Su, Zhaochen and Zong, Qing and Huang, Shijue and He, Bingxiang and Fung, Yi R.},
+  title         = {{CostBench}: Evaluating {Multi-Turn} {Cost-Optimal} Planning and Adaptation in Dynamic Environments for {LLM} {Tool-Use} Agents},
+  year          = {2025},
+  eprint        = {2511.02734},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2511.02734},
+}
+
+% Wersja opublikowana podaje „Pyskło”, arXiv „Pysklo”.
+@inproceedings{pysklo2026agentdiff,
+  author        = {Pysk{\l}o, Hubert M. and Zhuravel, Artem and Watson, Patrick D.},
+  title         = {{Agent-Diff}: Benchmarking {LLM} Agents on Enterprise {API} Tasks via Code Execution with {State-Diff-Based} Evaluation},
+  booktitle     = {Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.2},
+  pages         = {9707--9717},
+  publisher     = {ACM},
+  year          = {2026},
+  doi           = {10.1145/3770855.3817555},
+}
+
+@misc{jang2026odysseys,
+  author        = {Jang, Lawrence Keunho and Koh, Jing Yu and Fried, Daniel and Salakhutdinov, Ruslan},
+  title         = {Odysseys: Benchmarking Web Agents on Realistic Long Horizon Tasks},
+  year          = {2026},
+  eprint        = {2604.24964},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG},
+  url           = {https://arxiv.org/abs/2604.24964},
+}
+
+@inproceedings{fan2026agentprocessbench,
+  author        = {Fan, Shengda and Ye, Xuyan and Huo, Yupeng and Chen, Zhi-Yuan and Guo, Yiju and Yang, Shenzhi and Yang, Wenkai and Ye, Shuqi and Chen, Jingwen and Chen, Haotian and Cong, Xin and Lin, Yankai},
+  title         = {{AgentProcessBench}: Diagnosing {Step-Level} Process Quality in {Tool-Using} Agents},
+  booktitle     = {Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.2},
+  pages         = {8823--8834},
+  publisher     = {ACM},
+  year          = {2026},
+  doi           = {10.1145/3770855.3817494},
+}
+
+@misc{zhu2026redundant,
+  author        = {Zhu, Liang and Yang, Bo and Zhou, Zhinuo and Liang, Jiachen and Guo, Jiahao and Yin, Yiyang and Han, Xiongwei and Hu, Minyang},
+  title         = {Redundant or Necessary? A Benchmark for Detecting Redundant Steps in Agent Trajectories},
+  year          = {2026},
+  eprint        = {2605.29893},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2605.29893},
+}
+
+@misc{mazaheri2026agentatlas,
+  author        = {Mazaheri, Parsa and Mazaheri, Kasra},
+  title         = {{AgentAtlas}: Beyond Outcome Leaderboards for {LLM} Agents},
+  year          = {2026},
+  eprint        = {2605.20530},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2605.20530},
+}
+
+@misc{yagubyan2026consistent,
+  author        = {Yagubyan, Abel},
+  title         = {How Consistent Are {LLM} Agents? Measuring Behavioral Reproducibility in {Multi-Step} {Tool-Calling} Pipelines},
+  year          = {2026},
+  eprint        = {2605.28840},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2605.28840},
+}
+
+@misc{shu2026resolve,
+  author        = {Shu, Rui and Chong, Chun Yong and Zhou, Xin and Peng, Yun and Wu, Zihan and Han, Xu and Zhuang, Zeyang and Yuan, Guowen and Wang, Yuan},
+  title         = {What Resolve Rate Hides: Trajectory Structure Diagnostics for Coding Agents},
+  year          = {2026},
+  eprint        = {2607.06184},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.SE},
+  url           = {https://arxiv.org/abs/2607.06184},
+}
+
+@misc{bouchard2026beyond,
+  author        = {Bouchard, Dylan and Chauhan, Mohit Singh},
+  title         = {Beyond {Single-Turn} Confidence: {Trajectory-Adapted} Uncertainty Quantification for {LLM} Agents},
+  year          = {2026},
+  eprint        = {2608.11552},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2608.11552},
+}
+
+% ====================================================================================================
+% Rozpoznawanie algorytmu i strategii z zapisu działań
+% ====================================================================================================
+
+@inproceedings{perticas2017finding,
+  author        = {Per{\c{t}}ica{\c{s}}, C{\u{a}}t{\u{a}}lin F. and Indurkhya, Bipin and Florian, Razvan V. and Csato, Lehel},
+  title         = {Finding Patterns in Visualizations of Programs},
+  booktitle     = {28th Annual Workshop of the Psychology of Programming Interest Group (PPIG 2017)},
+  year          = {2017},
+  url           = {https://www.ppig.org/papers/2017-ppig-28th-perticas/},
+}
+
+@article{perticas2020neural,
+  author        = {Perticas, C{\u{a}}t{\u{a}}lin F. and Indurkhya, Bipin},
+  title         = {Neural networks learn to detect and emulate sorting algorithms from images of their execution traces},
+  journal       = {Information and Software Technology},
+  volume        = {126},
+  pages         = {106350},
+  year          = {2020},
+  doi           = {10.1016/j.infsof.2020.106350},
+}
+
+@article{taherkhani2013beacon,
+  author        = {Taherkhani, Ahmad and Malmi, Lauri},
+  title         = {Beacon- and {Schema-Based} Method for Recognizing Algorithms from Students' Source Code},
+  journal       = {Journal of Educational Data Mining},
+  volume        = {5},
+  number        = {2},
+  pages         = {69--101},
+  year          = {2013},
+  doi           = {10.5281/zenodo.3554635},
+}
+
+@inproceedings{taherkhani2012automatic,
+  author        = {Taherkhani, Ahmad and Korhonen, Ari and Malmi, Lauri},
+  title         = {Automatic recognition of students' sorting algorithm implementations in a data structures and algorithms course},
+  booktitle     = {Proceedings of the 12th Koli Calling International Conference on Computing Education Research},
+  pages         = {83--92},
+  publisher     = {ACM},
+  year          = {2012},
+  doi           = {10.1145/2401796.2401806},
+}
+
+@inproceedings{ramirez2009plan,
+  author        = {Ram{\'i}rez, Miquel and Geffner, Hector},
+  title         = {Plan Recognition as Planning},
+  booktitle     = {Proceedings of the Twenty-First International Joint Conference on Artificial Intelligence (IJCAI-09)},
+  pages         = {1778--1782},
+  year          = {2009},
+  url           = {https://www.ijcai.org/proceedings/2009/296},
+}
+
+@inproceedings{ramirez2010probabilistic,
+  author        = {Ram{\'i}rez, Miquel and Geffner, Hector},
+  title         = {Probabilistic Plan Recognition Using {Off-the-Shelf} Classical Planners},
+  booktitle     = {Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume        = {24},
+  number        = {1},
+  pages         = {1121--1126},
+  publisher     = {AAAI Press},
+  year          = {2010},
+  doi           = {10.1609/aaai.v24i1.7745},
+}
+
+@article{simon1975functional,
+  author        = {Simon, Herbert A.},
+  title         = {The functional equivalence of problem solving skills},
+  journal       = {Cognitive Psychology},
+  volume        = {7},
+  number        = {2},
+  pages         = {268--288},
+  year          = {1975},
+  doi           = {10.1016/0010-0285(75)90012-2},
+}
+
+@article{romik2006shortest,
+  author        = {Romik, Dan},
+  title         = {Shortest Paths in the {Tower} of {Hanoi} Graph and Finite Automata},
+  journal       = {SIAM Journal on Discrete Mathematics},
+  volume        = {20},
+  number        = {3},
+  pages         = {610--622},
+  year          = {2006},
+  doi           = {10.1137/050628660},
+}
+
+@inproceedings{velickovic2022clrs,
+  author        = {Veli{\v{c}}kovi{\'c}, Petar and {Puigdom{\`e}nech Badia}, Adri{\`a} and Budden, David and Pascanu, Razvan and Banino, Andrea and Dashevskiy, Misha and Hadsell, Raia and Blundell, Charles},
+  title         = {The {CLRS} Algorithmic Reasoning Benchmark},
+  booktitle     = {International Conference on Machine Learning (ICML 2022)},
+  year          = {2022},
+  eprint        = {2205.15659},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG},
+  url           = {https://arxiv.org/abs/2205.15659},
+}
+
+@misc{markeeva2024clrstext,
+  author        = {Markeeva, Larisa and McLeish, Sean and Ibarz, Borja and Bounsi, Wilfried and Kozlova, Olga and Vitvitskyi, Alex and Blundell, Charles and Goldstein, Tom and Schwarzschild, Avi and Veli{\v{c}}kovi{\'c}, Petar},
+  title         = {The {CLRS-Text} Algorithmic Reasoning Language Benchmark},
+  year          = {2024},
+  eprint        = {2406.04229},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG},
+  url           = {https://arxiv.org/abs/2406.04229},
+}
+
+@misc{berti2024rethinking,
+  author        = {Berti, Alessandro and Maatallah, Mayssa and Jessen, Urszula and Sroka, Michal and Ghannouchi, Sonia Ayachi},
+  title         = {{Re-Thinking} Process Mining in the {AI-Based} Agents Era},
+  year          = {2024},
+  eprint        = {2408.07720},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2408.07720},
+}
+
+@misc{berti2024pm4pyllm,
+  author        = {Berti, Alessandro},
+  title         = {{PM4Py.LLM}: a Comprehensive Module for Implementing {PM} on {LLMs}},
+  year          = {2024},
+  eprint        = {2404.06035},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.DB},
+  url           = {https://arxiv.org/abs/2404.06035},
+}
+
+@inproceedings{dorsch2025compass,
+  author        = {Dorsch, Rene and Henselmann, Daniel and Harth, Andreas},
+  title         = {{COMPASS}: A Process Mining-based Methodology for Prompt Optimization of Large Language Model Agents},
+  booktitle     = {Selected Papers of HybridAIMS 2025 and CAI 2025, co-located with CAiSE 2025},
+  series        = {CEUR Workshop Proceedings},
+  volume        = {3996},
+  pages         = {30--38},
+  year          = {2025},
+  url           = {https://ceur-ws.org/Vol-3996/paper-5.pdf},
+}
+
+@misc{elkoussy2026agentltl,
+  author        = {Elkoussy, La{\"i}la and Perez, Julien},
+  title         = {{AgentLTL}: A {Trace-Verification} Framework for Measuring, Enforcing, and Training Procedural Compliance in {Tool-Using} {LLM} Agents},
+  year          = {2026},
+  eprint        = {2607.02599},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.SE},
+  url           = {https://arxiv.org/abs/2607.02599},
+}
+
+% ====================================================================================================
+% Zgodność deklarowanego rozumowania lub planu z działaniem
+% ====================================================================================================
+
+@inproceedings{turpin2023language,
+  author        = {Turpin, Miles and Michael, Julian and Perez, Ethan and Bowman, Samuel R.},
+  title         = {Language Models Don't Always Say What They Think: Unfaithful Explanations in {Chain-of-Thought} Prompting},
+  booktitle     = {Advances in Neural Information Processing Systems},
+  volume        = {36},
+  year          = {2023},
+  eprint        = {2305.04388},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2305.04388},
+}
+
+@misc{lanham2023measuring,
+  author        = {Lanham, Tamera and Chen, Anna and Radhakrishnan, Ansh and Steiner, Benoit and Denison, Carson and Hernandez, Danny and Li, Dustin and Durmus, Esin and Hubinger, Evan and Kernion, Jackson and Luko{\v{s}}i{\=u}t{\.e}, Kamil{\.e} and Nguyen, Karina and Cheng, Newton and Joseph, Nicholas and Schiefer, Nicholas and Rausch, Oliver and Larson, Robin and McCandlish, Sam and Kundu, Sandipan and Kadavath, Saurav and Yang, Shannon and Henighan, Thomas and Maxwell, Timothy and Telleen-Lawton, Timothy and Hume, Tristan and Hatfield-Dodds, Zac and Kaplan, Jared and Brauner, Jan and Bowman, Samuel R. and Perez, Ethan},
+  title         = {Measuring Faithfulness in {Chain-of-Thought} Reasoning},
+  year          = {2023},
+  eprint        = {2307.13702},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2307.13702},
+}
+
+@misc{chen2025reasoning,
+  author        = {Chen, Yanda and Benton, Joe and Radhakrishnan, Ansh and Uesato, Jonathan and Denison, Carson and Schulman, John and Somani, Arushi and Hase, Peter and Wagner, Misha and Roger, Fabien and Mikulik, Vlad and Bowman, Samuel R. and Leike, Jan and Kaplan, Jared and Perez, Ethan},
+  title         = {Reasoning Models Don't Always Say What They Think},
+  year          = {2025},
+  eprint        = {2505.05410},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2505.05410},
+}
+
+@misc{oota2026llm,
+  author        = {Oota, Subba Reddy and Herrera, Francisco and {Cabot Sagrera}, Jordi and {L{\'o}pez de Prado}, Marcos and Khan, Shadab},
+  title         = {Do {LLM} Agents Execute the Plans They Declare? From {Planning-Mode} Declaration to {Pattern-Specific} Execution},
+  year          = {2026},
+  eprint        = {2609.38108},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2609.38108},
+}
+
+@inproceedings{liu2026plan,
+  author        = {Liu, Shuyang and Dehghan, Saman and Ganhotra, Jatin and Hirzel, Martin and Jabbarvand, Reyhaneh},
+  title         = {From Plan to Action: How Well Do Agents Follow the Plan?},
+  booktitle     = {Proceedings of the 41st IEEE/ACM International Conference on Automated Software Engineering},
+  pages         = {880--891},
+  publisher     = {ACM},
+  year          = {2026},
+  doi           = {10.1145/3832783.3834400},
+}
+
+@misc{dong2025say,
+  author        = {Dong, Lingzhong and Zhou, Ziqi and Yang, Shuaibo and Sheng, Haiyue and Cheng, Pengzhou and Wu, Zongru and Wu, Zheng and Liu, Gongshen and Zhang, Zhuosheng},
+  title         = {Say One Thing, Do Another? Diagnosing {Reasoning-Execution} Gaps in {VLM-Powered} {Mobile-Use} Agents},
+  year          = {2025},
+  eprint        = {2510.02204},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2510.02204},
+}
+
+@misc{jeong2026tape,
+  author        = {Jeong, Jongwon and Kim, Jungtaek and Lee, Kangwook},
+  title         = {{TAPE}: {Tool-Guided} Adaptive Planning and Constrained Execution in Language Model Agents},
+  year          = {2026},
+  eprint        = {2602.19633},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2602.19633},
+}
+
+@misc{li2026consistent,
+  author        = {Li, Heng-Zhuang and Zhang, Yi-Kai and Wang, Yu and Sun, Yueqing and Zhang, Jiayuan and Gu, Qi and Ye, Han-Jia},
+  title         = {Consistent {Plan-Act} for {Long-Horizon} Agentic Tasks},
+  year          = {2026},
+  eprint        = {2609.38891},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2609.38891},
+}
+
+@inproceedings{yao2023react,
+  author        = {Yao, Shunyu and Zhao, Jeffrey and Yu, Dian and Du, Nan and Shafran, Izhak and Narasimhan, Karthik and Cao, Yuan},
+  title         = {{ReAct}: Synergizing Reasoning and Acting in Language Models},
+  booktitle     = {International Conference on Learning Representations (ICLR 2023)},
+  year          = {2023},
+  eprint        = {2210.03629},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2210.03629},
+}
+
+@inproceedings{wang2023planandsolve,
+  author        = {Wang, Lei and Xu, Wanyu and Lan, Yihuai and Hu, Zhiqiang and Lan, Yunshi and Lee, Roy Ka-Wei and Lim, Ee-Peng},
+  title         = {{Plan-and-Solve} Prompting: Improving {Zero-Shot} {Chain-of-Thought} Reasoning by Large Language Models},
+  booktitle     = {Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  pages         = {2609--2634},
+  publisher     = {Association for Computational Linguistics},
+  year          = {2023},
+  doi           = {10.18653/v1/2023.acl-long.147},
+}
+
+% ====================================================================================================
+% Protokół ewaluacji, powtarzalność i raportowanie
+% ====================================================================================================
+
+@misc{atil2024nondeterminism,
+  author        = {Atil, Berk and Aykent, Sarp and Chittams, Alexa and Fu, Lisheng and Passonneau, Rebecca J. and Radcliffe, Evan and Rajagopal, Guru Rajan and Sloan, Adam and Tudrej, Tomasz and Ture, Ferhan and Wu, Zhe and Xu, Lixinyu and Baldwin, Breck},
+  title         = {{Non-Determinism} of ``Deterministic'' {LLM} Settings},
+  year          = {2024},
+  eprint        = {2408.04667},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2408.04667},
+}
+
+@misc{he2025defeating,
+  author        = {He, Horace and {Thinking Machines Lab}},
+  title         = {Defeating Nondeterminism in {LLM} Inference},
+  howpublished  = {Thinking Machines Lab: Connectionism},
+  year          = {2025},
+  doi           = {10.64434/tml.20250910},
+  url           = {https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/},
+}
+
+@inproceedings{sclar2024quantifying,
+  author        = {Sclar, Melanie and Choi, Yejin and Tsvetkov, Yulia and Suhr, Alane},
+  title         = {Quantifying Language Models' Sensitivity to Spurious Features in Prompt Design or: How {I} learned to start worrying about prompt formatting},
+  booktitle     = {International Conference on Learning Representations (ICLR 2024)},
+  year          = {2024},
+  eprint        = {2310.11324},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2310.11324},
+}
+
+@article{mizrahi2024state,
+  author        = {Mizrahi, Moran and Kaplan, Guy and Malkin, Dan and Dror, Rotem and Shahaf, Dafna and Stanovsky, Gabriel},
+  title         = {State of What Art? A Call for {Multi-Prompt} {LLM} Evaluation},
+  journal       = {Transactions of the Association for Computational Linguistics},
+  volume        = {12},
+  pages         = {933--949},
+  year          = {2024},
+  doi           = {10.1162/tacl_a_00681},
+}
+
+@misc{miller2024adding,
+  author        = {Miller, Evan},
+  title         = {Adding Error Bars to Evals: A Statistical Approach to Language Model Evaluations},
+  year          = {2024},
+  eprint        = {2411.00640},
+  archivePrefix = {arXiv},
+  primaryClass  = {stat.AP},
+  url           = {https://arxiv.org/abs/2411.00640},
+}
+
+@misc{bjarnason2026randomness,
+  author        = {Bjarnason, Bjarni Haukur and Silva, Andr{\'e} and Monperrus, Martin},
+  title         = {On Randomness in Agentic Evals},
+  year          = {2026},
+  eprint        = {2602.07150},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG},
+  url           = {https://arxiv.org/abs/2602.07150},
+}
+
+@misc{gupta2026reliabilitybench,
+  author        = {Gupta, Aayush},
+  title         = {{ReliabilityBench}: Evaluating {LLM} Agent Reliability Under {Production-Like} Stress Conditions},
+  year          = {2026},
+  eprint        = {2601.06112},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2601.06112},
+}
+
+@misc{chen2026bench2robust,
+  author        = {Chen, Chaoran and Nguyen, Vy and Zhang, Ziji and Gullapalli, Abhinav and Wang, Ziyi and Lu, Yuxuan and Wang, Dakuo and Huang, Jing and Yu, Zhou and Lai, Jin},
+  title         = {{Bench2Robust}: {Scenario-Controlled} Recovery for {Tool-Using} Agents},
+  year          = {2026},
+  eprint        = {2608.11977},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2608.11977},
+}
+
+@misc{kraishan2026loud,
+  author        = {Kraishan, Obada},
+  title         = {Loud Failures, Quiet Failures: Fault Detection and Recovery in {Tool-Using} Language Model Agents},
+  year          = {2026},
+  eprint        = {2610.10062},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  url           = {https://arxiv.org/abs/2610.10062},
+}
+
+@inproceedings{vaccaro2026preregistration,
+  author        = {Vaccaro, Michelle},
+  title         = {Preregistration for Experiments with {AI} Agents},
+  booktitle     = {International Conference on Machine Learning (ICML 2026), Position Paper Track},
+  year          = {2026},
+  eprint        = {2606.11217},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CY},
+  url           = {https://arxiv.org/abs/2606.11217},
+}
+
+@inproceedings{mitchell2019model,
+  author        = {Mitchell, Margaret and Wu, Simone and Zaldivar, Andrew and Barnes, Parker and Vasserman, Lucy and Hutchinson, Ben and Spitzer, Elena and Raji, Inioluwa Deborah and Gebru, Timnit},
+  title         = {Model Cards for Model Reporting},
+  booktitle     = {Proceedings of the Conference on Fairness, Accountability, and Transparency (FAT* '19)},
+  pages         = {220--229},
+  publisher     = {ACM},
+  year          = {2019},
+  doi           = {10.1145/3287560.3287596},
+}
+
+@article{kapoor2024reforms,
+  author        = {Kapoor, Sayash and Cantrell, Emily M. and Peng, Kenny and Pham, Thanh Hien and Bail, Christopher A. and Gundersen, Odd Erik and Hofman, Jake M. and Hullman, Jessica and Lones, Michael A. and Malik, Momin M. and Nanayakkara, Priyanka and Poldrack, Russell A. and Raji, Inioluwa Deborah and Roberts, Michael and Salganik, Matthew J. and Serra-Garcia, Marta and Stewart, Brandon M. and Vandewiele, Gilles and Narayanan, Arvind},
+  title         = {{REFORMS}: Consensus-based Recommendations for Machine-learning-based Science},
+  journal       = {Science Advances},
+  volume        = {10},
+  number        = {18},
+  pages         = {eadk3452},
+  year          = {2024},
+  doi           = {10.1126/sciadv.adk3452},
+}
+
+% ====================================================================================================
+% Statystyka
+% ====================================================================================================
+
+@article{holm1979simple,
+  author        = {Holm, Sture},
+  title         = {A Simple Sequentially Rejective Multiple Test Procedure},
+  journal       = {Scandinavian Journal of Statistics},
+  volume        = {6},
+  number        = {2},
+  pages         = {65--70},
+  year          = {1979},
+  url           = {https://www.jstor.org/stable/4615733},
+}
+
+@article{benjamini1995controlling,
+  author        = {Benjamini, Yoav and Hochberg, Yosef},
+  title         = {Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing},
+  journal       = {Journal of the Royal Statistical Society: Series B (Methodological)},
+  volume        = {57},
+  number        = {1},
+  pages         = {289--300},
+  year          = {1995},
+  doi           = {10.1111/j.2517-6161.1995.tb02031.x},
+}
+
+@article{benjamini2001control,
+  author        = {Benjamini, Yoav and Yekutieli, Daniel},
+  title         = {The control of the false discovery rate in multiple testing under dependency},
+  journal       = {The Annals of Statistics},
+  volume        = {29},
+  number        = {4},
+  pages         = {1165--1188},
+  year          = {2001},
+  doi           = {10.1214/aos/1013699998},
+}
+
+@article{cohen1960coefficient,
+  author        = {Cohen, Jacob},
+  title         = {A Coefficient of Agreement for Nominal Scales},
+  journal       = {Educational and Psychological Measurement},
+  volume        = {20},
+  number        = {1},
+  pages         = {37--46},
+  year          = {1960},
+  doi           = {10.1177/001316446002000104},
+}
+
+% DOI to wydanie elektroniczne Routledge (Crossref: 2013) tej samej książki; wydawca i miejsce wydania 1988 do potwierdzenia na egzemplarzu.
+@book{cohen1988statistical,
+  author        = {Cohen, Jacob},
+  title         = {Statistical Power Analysis for the Behavioral Sciences},
+  edition       = {2},
+  publisher     = {Lawrence Erlbaum Associates},
+  address       = {Hillsdale, NJ},
+  year          = {1988},
+  doi           = {10.4324/9780203771587},
+}
+
+@article{feinstein1990high,
+  author        = {Feinstein, Alvan R. and Cicchetti, Domenic V.},
+  title         = {High agreement but low {Kappa}: {I}. The problems of two paradoxes},
+  journal       = {Journal of Clinical Epidemiology},
+  volume        = {43},
+  number        = {6},
+  pages         = {543--549},
+  year          = {1990},
+  doi           = {10.1016/0895-4356(90)90158-L},
+}
+
+@article{gwet2008computing,
+  author        = {Gwet, Kilem Li},
+  title         = {Computing inter-rater reliability and its variance in the presence of high agreement},
+  journal       = {British Journal of Mathematical and Statistical Psychology},
+  volume        = {61},
+  number        = {1},
+  pages         = {29--48},
+  year          = {2008},
+  doi           = {10.1348/000711006X126600},
+}
+
+@article{newcombe1998interval,
+  author        = {Newcombe, Robert G.},
+  title         = {Interval estimation for the difference between independent proportions: comparison of eleven methods},
+  journal       = {Statistics in Medicine},
+  volume        = {17},
+  number        = {8},
+  pages         = {873--890},
+  year          = {1998},
+  doi           = {10.1002/(SICI)1097-0258(19980430)17:8<873::AID-SIM779>3.0.CO;2-I},
+}
+
+@article{brown2001interval,
+  author        = {Brown, Lawrence D. and Cai, T. Tony and DasGupta, Anirban},
+  title         = {Interval Estimation for a Binomial Proportion},
+  journal       = {Statistical Science},
+  volume        = {16},
+  number        = {2},
+  pages         = {101--133},
+  year          = {2001},
+  doi           = {10.1214/ss/1009213286},
+}
+
+@article{agresti1998approximate,
+  author        = {Agresti, Alan and Coull, Brent A.},
+  title         = {Approximate is Better than ``Exact'' for Interval Estimation of Binomial Proportions},
+  journal       = {The American Statistician},
+  volume        = {52},
+  number        = {2},
+  pages         = {119--126},
+  year          = {1998},
+  doi           = {10.1080/00031305.1998.10480550},
+}
+
+@article{wilson1927probable,
+  author        = {Wilson, Edwin B.},
+  title         = {Probable Inference, the Law of Succession, and Statistical Inference},
+  journal       = {Journal of the American Statistical Association},
+  volume        = {22},
+  number        = {158},
+  pages         = {209--212},
+  year          = {1927},
+  doi           = {10.1080/01621459.1927.10502953},
+}
+
+@article{clopper1934use,
+  author        = {Clopper, C. J. and Pearson, E. S.},
+  title         = {The use of confidence or fiducial limits illustrated in the case of the binomial},
+  journal       = {Biometrika},
+  volume        = {26},
+  number        = {4},
+  pages         = {404--413},
+  year          = {1934},
+  doi           = {10.1093/biomet/26.4.404},
+}
+
+@article{landis1977measurement,
+  author        = {Landis, J. Richard and Koch, Gary G.},
+  title         = {The Measurement of Observer Agreement for Categorical Data},
+  journal       = {Biometrics},
+  volume        = {33},
+  number        = {1},
+  pages         = {159--174},
+  year          = {1977},
+  doi           = {10.2307/2529310},
+}
+
+% ====================================================================================================
+% Metodyka tekstu, publikacja danych i oprogramowania
+% ====================================================================================================
+
+@book{wohlin2012experimentation,
+  author        = {Wohlin, Claes and Runeson, Per and H{\"o}st, Martin and Ohlsson, Magnus C. and Regnell, Bj{\"o}rn and Wessl{\'e}n, Anders},
+  title         = {Experimentation in Software Engineering},
+  publisher     = {Springer},
+  address       = {Berlin, Heidelberg},
+  year          = {2012},
+  doi           = {10.1007/978-3-642-29044-2},
+}
+
+@article{sollaci2004introduction,
+  author        = {Sollaci, Luciana B. and Pereira, Mauricio G.},
+  title         = {The introduction, methods, results, and discussion ({IMRAD}) structure: a fifty-year survey},
+  journal       = {Journal of the Medical Library Association},
+  volume        = {92},
+  number        = {3},
+  pages         = {364--367},
+  year          = {2004},
+  url           = {https://pubmed.ncbi.nlm.nih.gov/15243643/},
+}
+
+@article{smith2016software,
+  author        = {Smith, Arfon M. and Katz, Daniel S. and Niemeyer, Kyle E. and {FORCE11 Software Citation Working Group}},
+  title         = {Software citation principles},
+  journal       = {PeerJ Computer Science},
+  volume        = {2},
+  pages         = {e86},
+  year          = {2016},
+  doi           = {10.7717/peerj-cs.86},
+}
+
+@article{gebru2021datasheets,
+  author        = {Gebru, Timnit and Morgenstern, Jamie and Vecchione, Briana and Vaughan, Jennifer Wortman and Wallach, Hanna and Daum{\'e}, III, Hal and Crawford, Kate},
+  title         = {Datasheets for Datasets},
+  journal       = {Communications of the ACM},
+  volume        = {64},
+  number        = {12},
+  pages         = {86--92},
+  year          = {2021},
+  doi           = {10.1145/3458723},
 }

@@ -1,0 +1,622 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://algotrace.example/schemas/analyzer-result.v2.schema.json",
+  "title": "AlgoTrace analyzer result v2",
+  "description": "Result of the analyzer for one run, one JSON object per line of the series analysis file. Computed only from the run log (executed tool_call events) and the reference algorithms replayed on the same instance; read by the analysis.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "$ref": "common.v2.schema.json#/$defs/schema_version"
+    },
+    "run_id": {
+      "$ref": "common.v2.schema.json#/$defs/run_id"
+    },
+    "series_id": {
+      "$ref": "common.v2.schema.json#/$defs/slug"
+    },
+    "task": {
+      "$ref": "common.v2.schema.json#/$defs/task"
+    },
+    "n": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "instance_id": {
+      "$ref": "common.v2.schema.json#/$defs/slug"
+    },
+    "analyzer_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created": {
+      "$ref": "common.v2.schema.json#/$defs/timestamp"
+    },
+    "calibration_id": {
+      "description": "Version of the frozen thresholds (protocol D06); null before calibration.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "token_variant": {
+      "description": "Operation tokens used for distances: full = C(i,j)/S(i,j), type = C/S, relative = type + distance + result.",
+      "enum": [
+        "full",
+        "type",
+        "relative"
+      ]
+    },
+    "trace_length": {
+      "description": "Number of operation tokens: executed calls without done.",
+      "$ref": "common.v2.schema.json#/$defs/non_negative_integer"
+    },
+    "metrics": {
+      "description": "Measures of the run. The named ones are fixed for their task family; further numeric measures may be added.",
+      "type": "object",
+      "properties": {
+        "compares": {
+          "$ref": "common.v2.schema.json#/$defs/non_negative_integer"
+        },
+        "swaps": {
+          "$ref": "common.v2.schema.json#/$defs/non_negative_integer"
+        },
+        "redundant_compares": {
+          "description": "Comparisons whose result already followed by transitivity from earlier ones.",
+          "$ref": "common.v2.schema.json#/$defs/non_negative_integer"
+        },
+        "info_bound_compares": {
+          "description": "ceil(log2 N!).",
+          "$ref": "common.v2.schema.json#/$defs/non_negative_integer"
+        },
+        "inversions": {
+          "description": "Inversions of the initial array (swaps of bubble and insertion sort).",
+          "$ref": "common.v2.schema.json#/$defs/non_negative_integer"
+        },
+        "min_swaps": {
+          "description": "N minus the number of cycles of the initial permutation.",
+          "$ref": "common.v2.schema.json#/$defs/non_negative_integer"
+        },
+        "moves": {
+          "$ref": "common.v2.schema.json#/$defs/non_negative_integer"
+        },
+        "optimal_moves": {
+          "$ref": "common.v2.schema.json#/$defs/non_negative_integer"
+        },
+        "reads": {
+          "$ref": "common.v2.schema.json#/$defs/non_negative_integer"
+        },
+        "validation_errors": {
+          "$ref": "common.v2.schema.json#/$defs/non_negative_integer"
+        },
+        "recoveries_after_error": {
+          "description": "Errors followed by a valid call.",
+          "$ref": "common.v2.schema.json#/$defs/non_negative_integer"
+        },
+        "longest_error_streak": {
+          "$ref": "common.v2.schema.json#/$defs/non_negative_integer"
+        }
+      },
+      "additionalProperties": {
+        "type": [
+          "number",
+          "null"
+        ]
+      }
+    },
+    "distances": {
+      "description": "Distance of the trace to every variant of every reference algorithm replayed on the same instance, closest first.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "$ref": "#/$defs/algorithm"
+          },
+          "variant": {
+            "type": "string",
+            "minLength": 1
+          },
+          "distance": {
+            "$ref": "common.v2.schema.json#/$defs/non_negative_integer"
+          },
+          "normalized_distance": {
+            "description": "distance / max(length of trace, length of reference).",
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "reference_length": {
+            "$ref": "common.v2.schema.json#/$defs/non_negative_integer"
+          }
+        },
+        "required": [
+          "reference",
+          "variant",
+          "distance",
+          "normalized_distance",
+          "reference_length"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "label": {
+      "description": "Label of the run by the rules of the protocol (classification-rules.md, sections 1-2): a strategy when the goal state was reached, failed:<type> otherwise.",
+      "$ref": "#/$defs/strategy_label"
+    },
+    "exploratory_label": {
+      "description": "Strategy of a failed run against prefixes of the references of the same length (classification-rules.md, section 2, last point), only for exploratory analyses; null when label is not failed or the run is too short.",
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/strategy_label"
+            },
+            {
+              "properties": {
+                "kind": {
+                  "not": {
+                    "const": "failed"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "segments": {
+      "description": "Segments of a hybrid (dynamic programming over segments); [] for other labels.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "start_step": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "end_step": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "reference": {
+            "$ref": "#/$defs/algorithm"
+          },
+          "variant": {
+            "type": "string",
+            "minLength": 1
+          },
+          "normalized_distance": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "start_step",
+          "end_step",
+          "reference",
+          "variant",
+          "normalized_distance"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "declaration": {
+      "description": "Announced algorithm (protocol D01): the text comes from the first model_turn, its label from the analysis, not from the run log.",
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "declared_algorithm": {
+          "description": "Reference name, other (an algorithm without a reference) or null (nothing announced).",
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/algorithm"
+            }
+          ]
+        },
+        "labelled_by": {
+          "enum": [
+            "rule",
+            "manual",
+            "model",
+            null
+          ]
+        },
+        "matches_label": {
+          "description": "declared_algorithm equals label.algorithm; null when either is missing.",
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "text",
+        "declared_algorithm",
+        "labelled_by",
+        "matches_label"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "run_id",
+    "series_id",
+    "task",
+    "n",
+    "instance_id",
+    "analyzer_version",
+    "created",
+    "calibration_id",
+    "token_variant",
+    "trace_length",
+    "metrics",
+    "distances",
+    "label",
+    "exploratory_label",
+    "segments",
+    "declaration"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "description": "Labels of sorting.",
+      "if": {
+        "properties": {
+          "task": {
+            "const": "sort"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "label": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "known",
+                  "hybrid",
+                  "ambiguous",
+                  "new",
+                  "failed"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "description": "Labels of the Towers of Hanoi.",
+      "if": {
+        "properties": {
+          "task": {
+            "const": "hanoi"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "label": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "optimal",
+                  "optimal_detours",
+                  "other",
+                  "failed"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "description": "Labels of search; failure_detail only here.",
+      "if": {
+        "properties": {
+          "task": {
+            "const": "search"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "label": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "known",
+                  "ambiguous",
+                  "other",
+                  "too_short",
+                  "failed"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "label": {
+            "properties": {
+              "failure_detail": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "description": "An exploratory label only for a failed run.",
+      "if": {
+        "properties": {
+          "label": {
+            "properties": {
+              "kind": {
+                "const": "failed"
+              }
+            }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "exploratory_label": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "algorithm": {
+      "description": "Name of a reference algorithm or search pattern, e.g. bubble_sort, insertion_sort, selection_sort, quicksort, merge_sort, recursive_hanoi, binary_search, linear_search.",
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$"
+    },
+    "strategy_label": {
+      "description": "One label of the protocol (classification-rules.md, section 1).",
+      "type": "object",
+      "properties": {
+        "text": {
+          "description": "The label as the protocol writes it: known:<algorithm>, hybrid:<A>+<B>[+...] in the order of the segments, ambiguous:<A>|<B>[|...], new:info_first, new:other, optimal, optimal_detours, other, too_short, failed:<type>, in search failed:wrong_done:<detail>.",
+          "type": "string",
+          "pattern": "^(known:[a-z][a-z0-9_]*|hybrid:[a-z][a-z0-9_]*(\\+[a-z][a-z0-9_]*)+|ambiguous:[a-z][a-z0-9_]*(\\|[a-z][a-z0-9_]*)+|new:(info_first|other)|optimal|optimal_detours|other|too_short|failed:(wrong_done(:(false_absent|false_present|wrong_index))?|step_limit|errors|no_tool_call|context|infra))$"
+        },
+        "kind": {
+          "description": "known = one reference below the threshold; hybrid = segments of different references; ambiguous = several references equally close; new = no reference below the threshold (for manual coding); optimal, optimal_detours, other = Hanoi; too_short = search trace too short to tell the patterns apart; failed = the goal state was not reached (or a wrong done in search).",
+          "enum": [
+            "known",
+            "hybrid",
+            "ambiguous",
+            "new",
+            "optimal",
+            "optimal_detours",
+            "other",
+            "too_short",
+            "failed"
+          ]
+        },
+        "algorithms": {
+          "description": "known: the recognised reference; hybrid: the references of the segments in their order; ambiguous: the equally close references; [] for the other kinds.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/algorithm"
+          }
+        },
+        "variant": {
+          "description": "Variant of the recognised reference for known (additional information); null otherwise.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "subtype": {
+          "description": "new: info_first or other; failed: wrong_done (done_unsolved), step_limit, errors (too_many_errors), no_tool_call, context (context_exceeded) or infra (api_error, time_limit, cost_limit, interrupted); null otherwise.",
+          "enum": [
+            "info_first",
+            "other",
+            "wrong_done",
+            "step_limit",
+            "errors",
+            "no_tool_call",
+            "context",
+            "infra",
+            null
+          ]
+        },
+        "failure_detail": {
+          "description": "Search with failed:wrong_done: false_absent (answer -1, the target is in the array), false_present (a position, the target is not there) or wrong_index; null otherwise.",
+          "enum": [
+            "false_absent",
+            "false_present",
+            "wrong_index",
+            null
+          ]
+        },
+        "margin": {
+          "description": "Normalized distance of the second closest reference minus the closest; null when there is only one or no distance applies.",
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "text",
+        "kind",
+        "algorithms",
+        "variant",
+        "subtype",
+        "failure_detail",
+        "margin"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "known"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "algorithms": {
+                "minItems": 1,
+                "maxItems": 1
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "variant": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "hybrid",
+                  "ambiguous"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "algorithms": {
+                "minItems": 2
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "new",
+                  "optimal",
+                  "optimal_detours",
+                  "other",
+                  "too_short",
+                  "failed"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "algorithms": {
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "new"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "subtype": {
+                "enum": [
+                  "info_first",
+                  "other"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "failed"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "subtype": {
+                "enum": [
+                  "wrong_done",
+                  "step_limit",
+                  "errors",
+                  "no_tool_call",
+                  "context",
+                  "infra"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "not": {
+                  "enum": [
+                    "new",
+                    "failed"
+                  ]
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "subtype": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "subtype": {
+                "not": {
+                  "const": "wrong_done"
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "failure_detail": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

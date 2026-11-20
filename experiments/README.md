@@ -10,3 +10,5 @@ Planowany podział (podfoldery powstają razem z pierwszą konfiguracją):
 
 Konfiguracja nigdy nie zawiera klucza API, tylko nazwę zmiennej środowiskowej. Konfiguracji użytej w badaniu się nie
 zmienia: nowa wersja to nowy plik.
+
+Jak seria czyta konfigurację, planuje i wznawia przebiegi: [docs/specs/runner.md](../docs/specs/runner.md); format: [schemas/README.md](../schemas/README.md).

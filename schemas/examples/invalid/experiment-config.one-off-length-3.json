@@ -1,0 +1,103 @@
+{
+  "schema_version": "2.0",
+  "series": "pilot",
+  "series_id": "example-pilot-faults-one-off",
+  "description": "Invalid: a one_off fault with fault_length 3 (one_off fails exactly one call).",
+  "created": "2026-11-20",
+  "condition": "faults",
+  "repetitions": 1,
+  "models": [
+    {
+      "model_key": "claude-haiku-5-5",
+      "provider": "anthropic",
+      "model": "claude-haiku-5-5",
+      "model_version": "claude-haiku-5-5",
+      "api": {
+        "base_url": null,
+        "api_version": "2023-06-01",
+        "api_key_env": "ANTHROPIC_API_KEY"
+      },
+      "settings": {
+        "temperature": null,
+        "top_p": null,
+        "seed": null,
+        "max_output_tokens": 2048,
+        "reasoning": {
+          "mode": "none",
+          "effort": null,
+          "budget_tokens": null
+        },
+        "tool_choice": "auto",
+        "parallel_tool_calls": true,
+        "strict_tools": true,
+        "provider_options": {}
+      },
+      "timeouts": {
+        "request_timeout_s": 300,
+        "run_timeout_s": 10800
+      },
+      "local": null,
+      "price": {
+        "currency": "USD",
+        "input_per_mtok": 1.0,
+        "cached_input_per_mtok": 0.1,
+        "cache_write_per_mtok": 1.25,
+        "output_per_mtok": 5.0,
+        "valid_from": "2026-11-19",
+        "source": "example values for the schema, not a real price list"
+      }
+    }
+  ],
+  "tasks": [
+    {
+      "task": "sort",
+      "tool_set": "sort-v1",
+      "compare_result_format": "words",
+      "instances_file": "schemas/examples/instances.example.jsonl",
+      "sizes": [
+        {
+          "n": 3,
+          "max_steps": 6
+        }
+      ]
+    }
+  ],
+  "prompt": {
+    "prompt_id": "p1",
+    "prompt_variant": "main",
+    "language": "en",
+    "announcement_requested": true,
+    "system_file": "experiments/prompts/p1/system.txt",
+    "task_files": {
+      "sort": "experiments/prompts/p1/sort.txt"
+    },
+    "reminder_file": "experiments/prompts/p1/reminder.txt"
+  },
+  "limits": {
+    "max_errors": 10,
+    "max_reminders": 1,
+    "max_output_tokens_per_turn": 2048,
+    "max_cost_per_run": 2.0
+  },
+  "faults": {
+    "fault_type": "one_off",
+    "fault_length": 3,
+    "message": "Error: the tool is temporarily unavailable. The call was not executed."
+  },
+  "retries": {
+    "max_api_retries": 5,
+    "initial_backoff_s": 2.0,
+    "max_backoff_s": 120.0,
+    "max_run_retries": 2
+  },
+  "budget": {
+    "amount": 5.0,
+    "currency": "USD"
+  },
+  "output": {
+    "runs_dir": "data/runs/example-pilot-faults-one-off",
+    "results_csv": "data/results/example-pilot-faults-one-off.csv",
+    "analysis_file": "data/results/example-pilot-faults-one-off.analysis.jsonl",
+    "save_raw": true
+  }
+}

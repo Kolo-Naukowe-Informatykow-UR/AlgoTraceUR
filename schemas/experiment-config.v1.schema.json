@@ -1,0 +1,318 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://algotrace.example/schemas/experiment-config.v1.schema.json",
+  "title": "AlgoTrace experiment configuration v1",
+  "description": "One configuration of a stage of the study (series: pilot or full) with one condition and one variant of the texts: models x tasks x sizes x instances x repetitions. Written by the team into experiments/, read by the runner. Never changed after use (a new version is a new file). Never contains an API key, only the name of its environment variable.",
+  "type": "object",
+  "properties": {
+    "schema_version": { "$ref": "common.v1.schema.json#/$defs/schema_version" },
+    "series": { "$ref": "common.v1.schema.json#/$defs/series" },
+    "series_id": {
+      "description": "Identifier of this configuration (part of run_id), e.g. full-main and full-faults in the series full.",
+      "$ref": "common.v1.schema.json#/$defs/slug"
+    },
+    "description": { "type": "string", "minLength": 1 },
+    "created": { "$ref": "common.v1.schema.json#/$defs/date" },
+    "condition": { "$ref": "common.v1.schema.json#/$defs/condition" },
+    "repetitions": {
+      "description": "Runs per (model, instance); each repetition is a separate run with its own run_id.",
+      "type": "integer",
+      "minimum": 1
+    },
+    "models": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/model" },
+      "minItems": 1
+    },
+    "tasks": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/task_entry" },
+      "minItems": 1
+    },
+    "prompt": { "$ref": "#/$defs/prompt" },
+    "limits": { "$ref": "#/$defs/series_limits" },
+    "faults": {
+      "description": "Fault injection (protocol D02): required in condition faults, null otherwise.",
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "properties": {
+            "seed": { "type": "integer", "minimum": 0 },
+            "rules": {
+              "type": "array",
+              "items": { "$ref": "common.v1.schema.json#/$defs/fault_rule" },
+              "minItems": 1
+            }
+          },
+          "required": ["seed", "rules"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "retries": { "$ref": "#/$defs/retries" },
+    "budget": {
+      "description": "Budget of the whole series; null = no budget guard.",
+      "oneOf": [
+        { "type": "null" },
+        { "$ref": "common.v1.schema.json#/$defs/cost" }
+      ]
+    },
+    "output": { "$ref": "#/$defs/output" }
+  },
+  "required": ["schema_version", "series", "series_id", "description", "created", "condition", "repetitions", "models", "tasks", "prompt", "limits", "faults", "retries", "budget", "output"],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "description": "Fault rules exactly in the condition faults.",
+      "if": { "properties": { "condition": { "const": "faults" } } },
+      "then": { "properties": { "faults": { "type": "object" } } },
+      "else": { "properties": { "faults": { "type": "null" } } }
+    },
+    {
+      "description": "Variants other than main are pilot groups, and the condition faults uses the main texts (protocol prompts.md section 10, fault-injection.md section 2).",
+      "if": {
+        "anyOf": [
+          { "properties": { "series": { "const": "full" } } },
+          { "properties": { "condition": { "const": "faults" } } }
+        ]
+      },
+      "then": { "properties": { "prompt": { "properties": { "prompt_variant": { "const": "main" } } } } }
+    },
+    {
+      "description": "Sorting returns compare results as symbols exactly in the variant compare_symbols.",
+      "if": { "properties": { "prompt": { "properties": { "prompt_variant": { "const": "compare_symbols" } } } } },
+      "then": {
+        "properties": {
+          "tasks": {
+            "items": {
+              "if": { "properties": { "task": { "const": "sort" } } },
+              "then": { "properties": { "compare_result_format": { "const": "symbols" } } }
+            }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "tasks": {
+            "items": {
+              "if": { "properties": { "task": { "const": "sort" } } },
+              "then": { "properties": { "compare_result_format": { "const": "words" } } }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "model": {
+      "type": "object",
+      "properties": {
+        "model_key": {
+          "description": "Key of the model inside the series (part of run_id).",
+          "$ref": "common.v1.schema.json#/$defs/slug"
+        },
+        "provider": { "$ref": "common.v1.schema.json#/$defs/provider" },
+        "model": {
+          "description": "Model identifier as sent in the request.",
+          "type": "string",
+          "minLength": 1
+        },
+        "model_version": {
+          "description": "Exact version: a dated snapshot of the provider, or the digest of a local model (Ollama /api/tags).",
+          "type": "string",
+          "minLength": 1
+        },
+        "api": { "$ref": "#/$defs/api" },
+        "settings": { "$ref": "#/$defs/settings" },
+        "local": {
+          "description": "Local server and model build; null for a cloud API.",
+          "oneOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "properties": {
+                "server": { "type": "string", "minLength": 1 },
+                "server_version": { "type": "string", "minLength": 1 },
+                "context_length": { "type": "integer", "minimum": 1 },
+                "quantization": { "type": ["string", "null"] }
+              },
+              "required": ["server", "server_version", "context_length", "quantization"],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "price": {
+          "description": "Price used for cost; null = free or unknown (cost null).",
+          "oneOf": [
+            { "type": "null" },
+            { "$ref": "common.v1.schema.json#/$defs/price" }
+          ]
+        }
+      },
+      "required": ["model_key", "provider", "model", "model_version", "api", "settings", "local", "price"],
+      "additionalProperties": false
+    },
+    "api": {
+      "type": "object",
+      "properties": {
+        "base_url": {
+          "description": "null = the provider's default address.",
+          "type": ["string", "null"],
+          "pattern": "^https?://"
+        },
+        "api_version": { "type": ["string", "null"] },
+        "api_key_env": {
+          "description": "Name of the environment variable with the API key; null only for a local server without a key.",
+          "oneOf": [
+            { "type": "null" },
+            { "$ref": "common.v1.schema.json#/$defs/env_var_name" }
+          ]
+        }
+      },
+      "required": ["base_url", "api_version", "api_key_env"],
+      "additionalProperties": false
+    },
+    "settings": {
+      "description": "Generation settings; null = the parameter is not sent (the provider's default applies).",
+      "type": "object",
+      "properties": {
+        "temperature": { "type": ["number", "null"], "minimum": 0 },
+        "top_p": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "seed": { "type": ["integer", "null"] },
+        "max_output_tokens": { "type": "integer", "minimum": 1 },
+        "reasoning": {
+          "type": "object",
+          "properties": {
+            "mode": { "enum": ["none", "enabled", "adaptive"] },
+            "effort": { "enum": ["none", "minimal", "low", "medium", "high", null] },
+            "budget_tokens": { "type": ["integer", "null"], "minimum": 1 }
+          },
+          "required": ["mode", "effort", "budget_tokens"],
+          "additionalProperties": false
+        },
+        "tool_choice": { "enum": ["auto", "required", "none"] },
+        "parallel_tool_calls": {
+          "description": "Several tool calls in one turn are allowed and executed one after another in their order (protocol D04 A): the adapter never disables them, and true is the only value of v1.",
+          "type": "boolean",
+          "const": true
+        },
+        "strict_tools": {
+          "description": "Send the tool definitions with strict: true; false for an API without a strict mode (protocol prompts.md section 8).",
+          "type": "boolean"
+        },
+        "provider_options": { "$ref": "common.v1.schema.json#/$defs/secret_free_object" }
+      },
+      "required": ["temperature", "top_p", "seed", "max_output_tokens", "reasoning", "tool_choice", "parallel_tool_calls", "strict_tools", "provider_options"],
+      "additionalProperties": false
+    },
+    "task_entry": {
+      "type": "object",
+      "properties": {
+        "task": { "$ref": "common.v1.schema.json#/$defs/task" },
+        "tool_set": {
+          "description": "Name and version of the tool definitions known to the environment, e.g. sort-v1.",
+          "$ref": "common.v1.schema.json#/$defs/slug"
+        },
+        "compare_result_format": {
+          "description": "Sorting only: wording of compare results (words = less/greater, symbols = </> in the variant compare_symbols; equal only for an instance with repeated values); null for other tasks.",
+          "enum": ["words", "symbols", null]
+        },
+        "instances_file": { "$ref": "common.v1.schema.json#/$defs/relative_path" },
+        "sizes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "n": { "type": "integer", "minimum": 1 },
+              "max_steps": { "type": "integer", "minimum": 1 }
+            },
+            "required": ["n", "max_steps"],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        }
+      },
+      "required": ["task", "tool_set", "compare_result_format", "instances_file", "sizes"],
+      "additionalProperties": false
+    },
+    "prompt": {
+      "type": "object",
+      "properties": {
+        "prompt_id": {
+          "description": "Version of the prompt set (prompt_version of the protocol, e.g. p1).",
+          "$ref": "common.v1.schema.json#/$defs/slug"
+        },
+        "prompt_variant": {
+          "description": "Variant of the texts within the prompt set; the files below hold the texts of this variant.",
+          "$ref": "common.v1.schema.json#/$defs/prompt_variant"
+        },
+        "language": { "type": "string", "pattern": "^[a-z]{2}$" },
+        "announcement_requested": {
+          "description": "The prompt asks for a one-sentence announcement of the algorithm before the first call (protocol D01): false exactly in the variant no_announcement.",
+          "type": "boolean"
+        },
+        "system_file": { "$ref": "common.v1.schema.json#/$defs/relative_path" },
+        "task_files": {
+          "description": "Task description per task family.",
+          "type": "object",
+          "propertyNames": { "$ref": "common.v1.schema.json#/$defs/task" },
+          "additionalProperties": { "$ref": "common.v1.schema.json#/$defs/relative_path" },
+          "minProperties": 1
+        },
+        "reminder_file": { "$ref": "common.v1.schema.json#/$defs/relative_path" }
+      },
+      "required": ["prompt_id", "prompt_variant", "language", "announcement_requested", "system_file", "task_files", "reminder_file"],
+      "additionalProperties": false,
+      "if": { "properties": { "prompt_variant": { "const": "no_announcement" } } },
+      "then": { "properties": { "announcement_requested": { "const": false } } },
+      "else": { "properties": { "announcement_requested": { "const": true } } }
+    },
+    "series_limits": {
+      "description": "Limits for every run of the series; max_steps is given per size in tasks.",
+      "type": "object",
+      "properties": {
+        "max_errors": { "type": "integer", "minimum": 1 },
+        "max_reminders": { "type": "integer", "minimum": 0 },
+        "max_output_tokens_per_turn": { "type": "integer", "minimum": 1 },
+        "max_cost_per_run": { "type": ["number", "null"], "minimum": 0 },
+        "timeout_s_per_run": { "type": ["integer", "null"], "minimum": 1 }
+      },
+      "required": ["max_errors", "max_reminders", "max_output_tokens_per_turn", "max_cost_per_run", "timeout_s_per_run"],
+      "additionalProperties": false
+    },
+    "retries": {
+      "description": "Own retry loop (SDK retries off): API calls with Retry-After, and whole runs that ended with api_error.",
+      "type": "object",
+      "properties": {
+        "max_api_retries": { "type": "integer", "minimum": 0 },
+        "initial_backoff_s": { "type": "number", "minimum": 0 },
+        "max_backoff_s": { "type": "number", "minimum": 0 },
+        "request_timeout_s": { "type": "integer", "minimum": 1 },
+        "max_run_retries": { "type": "integer", "minimum": 0 }
+      },
+      "required": ["max_api_retries", "initial_backoff_s", "max_backoff_s", "request_timeout_s", "max_run_retries"],
+      "additionalProperties": false
+    },
+    "output": {
+      "type": "object",
+      "properties": {
+        "runs_dir": {
+          "description": "Folder of run logs: <runs_dir>/<run_id>.jsonl (.partial while running).",
+          "$ref": "common.v1.schema.json#/$defs/relative_path"
+        },
+        "results_csv": { "$ref": "common.v1.schema.json#/$defs/relative_path" },
+        "analysis_file": {
+          "description": "Analyzer results of the series, one JSON object per line.",
+          "$ref": "common.v1.schema.json#/$defs/relative_path"
+        },
+        "save_raw": {
+          "description": "Also write raw API requests and responses to <runs_dir>/<run_id>.raw.jsonl (format of the adapters, without headers carrying keys).",
+          "type": "boolean"
+        }
+      },
+      "required": ["runs_dir", "results_csv", "analysis_file", "save_raw"],
+      "additionalProperties": false
+    }
+  }
+}

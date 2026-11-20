@@ -1,29 +1,31 @@
-\section{Wstęp}
+\section{Introduction}
 \label{sec:introduction}
 
-\TODO{problem: modele językowe działają jako agenci przez wywołania narzędzi, a testy tool callingu oceniają głównie
-poprawność wywołań i wyniku, rzadko to, jak model doszedł do rozwiązania.}
+\TODO{problem: language models act as agents through tool calls, while tool-calling benchmarks mostly assess whether
+the calls and the final result are correct, and rarely how the model arrived at the solution.}
 
-\subsection{Cel badania}
+\subsection{Goal of the study}
 \label{sec:goal}
 
-\TODO{cel: otwarte środowisko testowe z analizatorem przebiegów i raport, jak skutecznie i jakimi algorytmami modele
-LLM różnych dostawców rozwiązują zadania przez tool calling.}
+\TODO{goal: an open test environment with a trace analyzer, and a report on how successfully and with which
+algorithms LLMs of different providers solve tasks through tool calling.}
 
-\subsection{Pytania badawcze}
+\subsection{Research questions}
 \label{sec:questions}
 
 \begin{enumerate}
-  \item \textbf{Skuteczność:} jak odsetek poprawnie rozwiązanych zadań zależy od modelu, dostawcy i rozmiaru
-    zadania $N$?
-  \item \textbf{Algorytm:} jakie algorytmy modele faktycznie wykonują: znane, ich mieszanki czy własne strategie?
-  \item \textbf{Deklaracja a wykonanie:} czy algorytm zapowiedziany w tekście zgadza się z wykonanym?
-  \item \textbf{Efektywność:} ile porównań i zamian zużywa model wobec granic teoretycznych i algorytmów wzorcowych?
-  \item \textbf{Zmiana strategii:} czy model zmienia algorytm, gdy rośnie $N$ albo gdy narzędzie zwróci błąd?
+  \item \textbf{Success:} how does the share of correctly solved tasks depend on the model, the provider and the task
+    size $N$?
+  \item \textbf{Algorithm:} which algorithms do models actually execute: known ones, mixtures of them or strategies
+    of their own?
+  \item \textbf{Declaration versus execution:} does the algorithm announced in the text match the executed one?
+  \item \textbf{Efficiency:} how many comparisons and swaps does a model use compared with theoretical bounds and
+    reference algorithms?
+  \item \textbf{Change of strategy:} does a model change its algorithm when $N$ grows or when a tool returns an error?
 \end{enumerate}
 
-\subsection{Wkład}
+\subsection{Contribution}
 \label{sec:contribution}
 
-\TODO{co nowego: każdy ruch jako osobne wywołanie narzędzia na ukrytym stanie, rozpoznawanie algorytmu z zapisu
-ruchów, porównanie deklaracji z wykonaniem, gotowe modele wielu dostawców bez trenowania.}
+\TODO{what is new: every move as a separate tool call on a hidden state, recognition of the algorithm from the record
+of moves, comparison of the declaration with the execution, off-the-shelf models of many providers without training.}

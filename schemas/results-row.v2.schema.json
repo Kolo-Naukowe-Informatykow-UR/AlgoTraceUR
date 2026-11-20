@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://algotrace.example/schemas/results-row.v2.schema.json",
+  "title": "AlgoTrace results row v2",
+  "description": "One row of the results CSV (one row per finished run, every attempt included), as an object after parsing: integer and number columns as numbers, boolean columns as true/false, an empty cell as null. The CSV header lists the columns in the order of properties below. Written by the runner from run_start, the model_turn events and run_end only; read by the analysis.",
+  "type": "object",
+  "properties": {
+    "schema_version": { "$ref": "common.v2.schema.json#/$defs/schema_version" },
+    "series_id": { "$ref": "common.v2.schema.json#/$defs/slug" },
+    "series": { "$ref": "common.v2.schema.json#/$defs/series" },
+    "run_id": { "$ref": "common.v2.schema.json#/$defs/run_id" },
+    "condition": { "$ref": "common.v2.schema.json#/$defs/condition" },
+    "fault_type": {
+      "description": "Fault type of the condition faults; null in main.",
+      "enum": ["one_off", "persistent", null]
+    },
+    "model_key": { "$ref": "common.v2.schema.json#/$defs/slug" },
+    "provider": { "$ref": "common.v2.schema.json#/$defs/provider" },
+    "model_requested": { "type": "string", "minLength": 1 },
+    "model_version": { "type": "string", "minLength": 1 },
+    "model_returned": {
+      "description": "model_returned of the last model_turn; null when the run has no turn.",
+      "type": ["string", "null"]
+    },
+    "task": { "$ref": "common.v2.schema.json#/$defs/task" },
+    "n": { "type": "integer", "minimum": 1 },
+    "instance_id": { "$ref": "common.v2.schema.json#/$defs/slug" },
+    "repetition": { "type": "integer", "minimum": 1 },
+    "run_attempt": { "$ref": "common.v2.schema.json#/$defs/run_attempt" },
+    "prompt_id": { "$ref": "common.v2.schema.json#/$defs/slug" },
+    "prompt_variant": { "$ref": "common.v2.schema.json#/$defs/prompt_variant" },
+    "announcement_requested": { "type": "boolean" },
+    "tool_set": { "$ref": "common.v2.schema.json#/$defs/slug" },
+    "parallel_tool_calls": { "type": "boolean", "const": true },
+    "strict_tools": { "type": "boolean" },
+    "solved": { "type": "boolean" },
+    "done_called": { "type": "boolean" },
+    "end_reason": { "$ref": "common.v2.schema.json#/$defs/end_reason" },
+    "superseded_by": {
+      "description": "run_id of the next attempt; the analysis takes the rows with null.",
+      "oneOf": [{ "type": "null" }, { "$ref": "common.v2.schema.json#/$defs/run_id" }]
+    },
+    "steps": { "$ref": "common.v2.schema.json#/$defs/non_negative_integer" },
+    "turns": { "$ref": "common.v2.schema.json#/$defs/non_negative_integer" },
+    "executed_calls": { "$ref": "common.v2.schema.json#/$defs/non_negative_integer" },
+    "compare_calls": {
+      "description": "Executed calls of the tool; 0 when the task has no such tool.",
+      "$ref": "common.v2.schema.json#/$defs/non_negative_integer"
+    },
+    "swap_calls": { "$ref": "common.v2.schema.json#/$defs/non_negative_integer" },
+    "move_calls": { "$ref": "common.v2.schema.json#/$defs/non_negative_integer" },
+    "read_calls": { "$ref": "common.v2.schema.json#/$defs/non_negative_integer" },
+    "done_calls": { "$ref": "common.v2.schema.json#/$defs/non_negative_integer" },
+    "validation_errors": { "$ref": "common.v2.schema.json#/$defs/non_negative_integer" },
+    "injected_faults": { "$ref": "common.v2.schema.json#/$defs/non_negative_integer" },
+    "fault_fired": {
+      "description": "injected_faults > 0 in the condition faults; null in main.",
+      "type": ["boolean", "null"]
+    },
+    "skipped_calls": { "$ref": "common.v2.schema.json#/$defs/non_negative_integer" },
+    "text_turns": { "$ref": "common.v2.schema.json#/$defs/non_negative_integer" },
+    "reminders": { "$ref": "common.v2.schema.json#/$defs/non_negative_integer" },
+    "parallel_turns": { "$ref": "common.v2.schema.json#/$defs/non_negative_integer" },
+    "input_tokens": { "$ref": "common.v2.schema.json#/$defs/optional_count" },
+    "cached_input_tokens": { "$ref": "common.v2.schema.json#/$defs/optional_count" },
+    "cache_write_tokens": { "$ref": "common.v2.schema.json#/$defs/optional_count" },
+    "output_tokens": { "$ref": "common.v2.schema.json#/$defs/optional_count" },
+    "reasoning_tokens": { "$ref": "common.v2.schema.json#/$defs/optional_count" },
+    "cost": { "type": ["number", "null"], "minimum": 0 },
+    "currency": { "type": ["string", "null"], "pattern": "^[A-Z]{3}$" },
+    "duration_ms": { "$ref": "common.v2.schema.json#/$defs/non_negative_integer" },
+    "started_at": { "$ref": "common.v2.schema.json#/$defs/timestamp" },
+    "ended_at": { "$ref": "common.v2.schema.json#/$defs/timestamp" },
+    "env_version": { "type": "string", "minLength": 1 },
+    "config_sha256": { "$ref": "common.v2.schema.json#/$defs/sha256" }
+  },
+  "required": ["schema_version", "series_id", "series", "run_id", "condition", "fault_type", "model_key", "provider", "model_requested", "model_version", "model_returned", "task", "n", "instance_id", "repetition", "run_attempt", "prompt_id", "prompt_variant", "announcement_requested", "tool_set", "parallel_tool_calls", "strict_tools", "solved", "done_called", "end_reason", "superseded_by", "steps", "turns", "executed_calls", "compare_calls", "swap_calls", "move_calls", "read_calls", "done_calls", "validation_errors", "injected_faults", "fault_fired", "skipped_calls", "text_turns", "reminders", "parallel_turns", "input_tokens", "cached_input_tokens", "cache_write_tokens", "output_tokens", "reasoning_tokens", "cost", "currency", "duration_ms", "started_at", "ended_at", "env_version", "config_sha256"],
+  "additionalProperties": false
+}

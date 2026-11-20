@@ -1,11 +1,11 @@
-\section{Metoda}
+\section{Method}
 \label{sec:method}
 
-\subsection{Środowisko}
+\subsection{Environment}
 \label{sec:environment}
 
-Model nie widzi danych zadania: zmienia i odczytuje ukryty stan tylko przez narzędzia, a każde wywołanie trafia do
-zapisu przebiegu (rys.~\ref{fig:environment}).
+The model does not see the task data: it changes and reads the hidden state only through tools, and every call goes
+into the trace (Fig.~\ref{fig:environment}).
 
 \begin{figure}[htbp]
   \centering
@@ -14,13 +14,13 @@ zapisu przebiegu (rys.~\ref{fig:environment}).
       box/.style={draw, rounded corners, align=center, font=\small, minimum height=10mm, minimum width=24mm},
       arr/.style={-{Stealth}, thick},
       both/.style={{Stealth}-{Stealth}, thick}]
-    \node[box] (gen) {Generator\\zadań};
-    \node[box, right=of gen] (sandbox) {Piaskownica\\(ukryty stan)};
-    \node[box, right=of sandbox] (loop) {Pętla\\tool callingu};
-    \node[box, right=of loop] (model) {Model LLM\\(przez adapter)};
-    \node[box, below=of loop] (trace) {Zapis\\przebiegu};
-    \node[box, left=of trace] (analyzer) {Analizator};
-    \node[box, left=of analyzer] (refs) {Algorytmy\\wzorcowe};
+    \node[box] (gen) {Task\\generator};
+    \node[box, right=of gen] (sandbox) {Sandbox\\(hidden state)};
+    \node[box, right=of sandbox] (loop) {Tool-calling\\loop};
+    \node[box, right=of loop] (model) {LLM\\(via adapter)};
+    \node[box, below=of loop] (trace) {Trace};
+    \node[box, left=of trace] (analyzer) {Analyzer};
+    \node[box, left=of analyzer] (refs) {Reference\\algorithms};
     \draw[arr] (gen) -- (sandbox);
     \draw[both] (sandbox) -- (loop);
     \draw[both] (loop) -- (model);
@@ -28,63 +28,63 @@ zapisu przebiegu (rys.~\ref{fig:environment}).
     \draw[arr] (trace) -- (analyzer);
     \draw[arr] (refs) -- (analyzer);
   \end{tikzpicture}
-  \caption{Przepływ danych: wykonanie zadania (góra) i analiza po fakcie (dół).}
+  \caption{Data flow: task execution (top) and post-hoc analysis (bottom).}
   \label{fig:environment}
 \end{figure}
 
-\TODO{generator z ziarnem, walidacja argumentów, limity, wstrzykiwanie błędów, adaptery dostawców.}
+\TODO{seeded generator, argument validation, limits, fault injection, provider adapters.}
 
-\subsection{Zadania}
+\subsection{Tasks}
 \label{sec:tasks}
 
 \begin{table}[htbp]
   \centering
-  \caption{Rodziny zadań, narzędzia i granice teoretyczne.}
+  \caption{Task families, tools and theoretical bounds.}
   \label{tab:tasks}
   \small
   \begin{tabular}{@{}p{2.8cm}p{3.4cm}p{4.2cm}p{3.6cm}@{}}
     \toprule
-    Zadanie & Narzędzia & Wzorce & Granica \\
+    Task & Tools & Reference algorithms & Bound \\
     \midrule
-    Sortowanie $N$ elementów & \tool{compare(i, j)}, \tool{swap(i, j)} & bąbelkowe, przez wstawianie, przez wybór,
-      szybkie, scalanie & $\lceil \log_2 N! \rceil$ porównań \\
-    Wieże Hanoi, $n$ krążków & \tool{move(from, to)} & rekurencyjne & $2^n - 1$ ruchów \\
-    Wyszukiwanie & \tool{read(index)} & binarne, liniowe, interpolacyjne & $\lceil \log_2 (N + 1) \rceil$ odczytów
-      (binarne) \\
+    Sorting $N$ elements & \tool{compare(i, j)}, \tool{swap(i, j)} & bubble, insertion, selection, quick and merge
+      sort & $\lceil \log_2 N! \rceil$ comparisons \\
+    Tower of Hanoi, $n$ disks & \tool{move(from, to)} & recursive & $2^n - 1$ moves \\
+    Search & \tool{read(index)} & binary, linear, interpolation & $\lceil \log_2 (N + 1) \rceil$ reads
+      (binary) \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-\subsection{Rozpoznawanie algorytmu}
+\subsection{Algorithm recognition}
 \label{sec:recognition}
 
-\TODO{cechy przebiegu, odtworzenie wzorców na tych samych danych, odległość ciągów operacji, klasyfikacja: znany
-algorytm, hybryda, strategia nowa; walidacja na syntetycznych przebiegach.}
+\TODO{trace features, replay of the reference algorithms on the same data, distance between operation sequences,
+classification: known algorithm, hybrid, new strategy; validation on synthetic traces.}
 
 \begin{algorithm}[htbp]
-  \caption{Klasyfikacja przebiegu sortowania (szkic).}
+  \caption{Classification of a sorting trace (sketch).}
   \label{alg:classify}
   \begin{algorithmic}[1]
-    \Require zapis przebiegu $T$, dane wejściowe $x$, warianty wzorców $\mathcal{W}$, próg $\tau$
-    \If{stan końcowy nie jest posortowany}
-      \State \Return błąd i jego rodzaj
+    \Require trace $T$, input data $x$, variants of the reference algorithms $\mathcal{W}$, threshold $\tau$
+    \If{the final state is not sorted}
+      \State \Return error and its type
     \EndIf
     \ForAll{$w \in \mathcal{W}$}
-      \State $d_w \gets$ odległość ciągu operacji $T$ od przebiegu $w(x)$
+      \State $d_w \gets$ distance of the operation sequence of $T$ from the trace $w(x)$
     \EndFor
     \If{$\min_w d_w < \tau$}
-      \State \Return znany algorytm $\arg\min_w d_w$
-    \ElsIf{fragmenty $T$ pasują do różnych wzorców}
-      \State \Return hybryda
+      \State \Return known algorithm $\arg\min_w d_w$
+    \ElsIf{parts of $T$ match different reference algorithms}
+      \State \Return hybrid
     \Else
-      \State \Return strategia nowa
+      \State \Return new strategy
     \EndIf
   \end{algorithmic}
 \end{algorithm}
 
-\subsection{Miary}
+\subsection{Measures}
 \label{sec:measures}
 
-\TODO{skuteczność; porównania wobec $\lceil \log_2 N! \rceil$ i wzorca, porównania zbędne na grafie relacji
-elementów; zamiany wobec liczby inwersji i $N - c$, gdzie $c$ to liczba cykli permutacji; błędy; zgodność
-deklaracji; tokeny, czas i koszt.}
+\TODO{success; comparisons against $\lceil \log_2 N! \rceil$ and the reference algorithm, redundant comparisons on the
+graph of relations between elements; swaps against the number of inversions and $N - c$, where $c$ is the number of
+cycles of the permutation; errors; agreement with the declaration; tokens, time and cost.}

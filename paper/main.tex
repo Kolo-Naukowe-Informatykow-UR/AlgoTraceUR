@@ -1,8 +1,8 @@
-% AlgoTrace: tekst badania.
-% Budowanie: latexmk w folderze paper/ (ustawienia w .latexmkrc); działa z pdfLaTeX i LuaLaTeX, bibliografia: biber.
+% AlgoTrace: research paper.
+% Build: latexmk in the paper/ folder (settings in .latexmkrc); works with pdfLaTeX and LuaLaTeX, bibliography: biber.
 \documentclass[a4paper,11pt]{article}
 
-% ---------- Fonty i kodowanie (pdfLaTeX albo LuaLaTeX) ----------
+% ---------- Fonts and encoding (pdfLaTeX or LuaLaTeX) ----------
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
@@ -12,17 +12,17 @@
   \usepackage{fontspec}
 \fi
 
-% ---------- Język ----------
-% Język główny tekstu: main=polish albo main=english (decyzja zespołu); streszczenia są w obu językach.
-\usepackage[english,main=polish]{babel}
+% ---------- Language ----------
+% Main language of the text: main=english (team decision); the abstract is in both languages.
+\usepackage[polish,main=english]{babel}
 \usepackage{csquotes}
 
-% ---------- Układ strony i typografia ----------
+% ---------- Page layout and typography ----------
 \usepackage[margin=2.5cm]{geometry}
 \usepackage{microtype}
 \usepackage{xcolor}
 
-% ---------- Matematyka, tabele, rysunki, algorytmy ----------
+% ---------- Mathematics, tables, figures, algorithms ----------
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{booktabs}
@@ -33,27 +33,28 @@
 \usepackage{listings}
 \lstset{basicstyle=\ttfamily\small,columns=fullflexible,breaklines=true,frame=single}
 
-% ---------- Bibliografia ----------
+% ---------- Bibliography ----------
 \usepackage[backend=biber,style=numeric,sorting=none,maxbibnames=10]{biblatex}
 \addbibresource{references.bib}
 
-% ---------- Odnośniki (prawie na końcu preambuły) ----------
+% ---------- Hyperlinks (near the end of the preamble) ----------
 \usepackage[hidelinks]{hyperref}
 
-% ---------- Pseudokod (po hyperref) ----------
+% ---------- Pseudocode (after hyperref) ----------
 \usepackage{algorithm}
 \usepackage{algpseudocode}
+% Polish name of the algorithm float, used only inside otherlanguage{polish}.
 \addto\captionspolish{\floatname{algorithm}{Algorytm}}
 
-% ---------- Polecenia projektu ----------
+% ---------- Project commands ----------
 \newcommand{\TODO}[1]{\textcolor{red}{[TODO: #1]}}
 \newcommand{\tool}[1]{\texttt{#1}}
 
-% ---------- Metadane ----------
-\title{AlgoTrace: jakimi algorytmami modele językowe rozwiązują zadania przez tool calling}
-\author{Zespół projektu AlgoTrace\\
-  Koło Naukowe Informatyków, Uniwersytet Rzeszowski\\
-  \TODO{autorzy i afiliacje}}
+% ---------- Metadata ----------
+\title{AlgoTrace: Which Algorithms Do Language Models Use to Solve Tasks Through Tool Calling?}
+\author{AlgoTrace project team\\
+  Koło Naukowe Informatyków, University of Rzeszów\\
+  \TODO{authors and affiliations}}
 \date{\today}
 
 \begin{document}

@@ -1,0 +1,74 @@
+# Builds the research paper (paper/) into a PDF with latexmk and biber in a full TeX Live container.
+# The PDF is the artifact "paper-pdf"; on failure the artifact also holds main.log and main.blg.
+# Action versions as in the README of xu-cheng/latex-action (checked 2026-11-19).
+name: paper
+
+on:
+  push:
+    paths:
+      - 'paper/**'
+      - '.github/workflows/paper.yml'
+  pull_request:
+    paths:
+      - 'paper/**'
+      - '.github/workflows/paper.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: paper-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+
+      # latexmk runs in paper/ and reads paper/.latexmkrc, so the PDF lands in paper/build/.
+      - name: Build PDF (latexmk, biber)
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: main.tex
+          working_directory: paper
+
+      - name: Errors and warnings to the job summary
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo "## paper: errors and warnings"
+            for f in paper/build/main.log paper/build/main.blg; do
+              echo "### $f"
+              if [ -f "$f" ]; then
+                m=$(grep -nE '^!|:[0-9]+: |Warning|undefined|WARN|ERROR' "$f" | head -n 200 || true)
+                echo '```'
+                echo "${m:-none}"
+                echo '```'
+              else
+                echo "missing"
+              fi
+            done
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload PDF
+        if: success()
+        uses: actions/upload-artifact@v6
+        with:
+          name: paper-pdf
+          path: paper/build/main.pdf
+          if-no-files-found: error
+
+      - name: Upload PDF and logs after a failure
+        if: failure()
+        uses: actions/upload-artifact@v6
+        with:
+          name: paper-pdf
+          path: |
+            paper/build/main.pdf
+            paper/build/main.log
+            paper/build/main.blg
+          if-no-files-found: warn

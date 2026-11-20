@@ -1,5 +1,7 @@
 # src/analyzer
 
+Specyfikacja (cel, interfejsy, zachowanie, testy akceptacyjne): [docs/specs/analyzer.md](../../docs/specs/analyzer.md).
+
 Analizator przebiegów: z zapisu przebiegu rozpoznaje, jaką strategią model rozwiązał zadanie.
 
 Kroki dla sortowania:
@@ -20,3 +22,24 @@ indeksów) i dochodzi później.
 
 Przed badaniem analizator przechodzi walidację na syntetycznych przebiegach z `data/synthetic/`: co najmniej
 6 algorytmów, trafność co najmniej 95%. Próg i reguła hybrydy są w `docs/protocol/`.
+
+## Język i narzędzia
+
+Python 3.13, pakiet `algotrace_analyzer` w workspace uv repozytorium. Główne biblioteki:
+
+- `rapidfuzz`: znormalizowana odległość edycyjna na ciągach operacji;
+- `scikit-learn`: n-gramy operacji, drugi sposób porównania z wzorcami;
+- `jsonschema`: odczyt zapisów przebiegu zgodnych ze `schemas/`;
+- `networkx` tylko w testach: sprawdza porównania zbędne, które kod liczy własnym grafem relacji.
+
+Decyzja, wersje i odrzucone opcje: [0001 Stos technologiczny modułów](../../docs/decisions/0001-stos-technologiczny.md).
+
+## Budowanie i uruchamianie
+
+Plan: polecenia zadziałają, gdy powstanie kod analizatora. Z katalogu głównego repozytorium:
+
+```
+uv sync --locked --all-packages
+uv run --locked python -m algotrace_analyzer ...
+uv run --locked pytest tests/python/analyzer
+```
