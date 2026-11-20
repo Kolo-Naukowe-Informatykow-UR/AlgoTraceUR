@@ -33,9 +33,9 @@ Protokół eksperymentu (`docs/protocol/`, sekcja „Zgodność ze schematami”
 miał. Zmiany są niezgodne z v1, więc to nowa wersja główna, a nie wersja `1.1`: `run_id` liczy się teraz także
 z `run_attempt`, przybyły pola wymagane, reguły błędów na konfigurację (`fault_rule`, `rule_index`) zastąpił harmonogram
 na instancję, limity czasu przeszły z konfiguracji do modelu, a etykiety analizatora są etykietami protokołu. v1 nie
-został wydany: pliki nie były w gicie, nie używał ich żaden kod ani zapis danych, więc v2 zastępuje v1 bez czytnika
-v1 (decyzja przyjęta w wariancie A). Pliki `*.v1.schema.json` w tym folderze są nieaktualne i do usunięcia;
-skrypt sprawdza tylko `*.v2.schema.json`.
+był używany: nie czytał go żaden kod ani zapis danych, więc v2 zastępuje v1 bez czytnika v1 (decyzja przyjęta
+w wariancie A). Pliki `*.v1.schema.json` usunięto 20.11.2026 (są w historii Gita); skrypt sprawdza tylko
+`*.v2.schema.json`.
 
 | Obszar | v1 | v2 |
 |---|---|---|

@@ -35,6 +35,29 @@ strategię. Projekt składa się z sześciu programów:
    jeśli nie musisz.
 8. `src/<program>/README.md` i [tests/README.md](tests/README.md): polecenia budowania i testów.
 
+Przy tekście badania zamiast kroków 5-8: [paper/README.md](paper/README.md),
+[docs/knowledge/paper-and-conferences.md](docs/knowledge/paper-and-conferences.md) (budowa tekstu, konferencja)
+i [docs/knowledge/literature.md](docs/knowledge/literature.md) (prace powiązane). Terminy:
+[docs/project/timeline.md](docs/project/timeline.md).
+
+## Praca z kartą z urwisa
+
+Zadania zespołu są kartami w urwisie koła (projekt AlgoTraceUR, klucz `ALGO`). Opis karty pracy ma linie „Cel:”,
+„Gotowe, gdy:”, „Zależy od:” (klucze `ALGO-…` z tytułami), „Zacznij od:” (pliki tego repozytorium) i „Jak sprawdzić:”;
+podzadania karty to jej kroki. Karta i repozytorium wystarczą do pracy, bez innych notatek.
+
+1. Weź kartę z `Do zrobienia`, której karty z „Zależy od” są w `Zrobione` (urwis oznacza kartę zablokowaną), wpisz
+   siebie jako wykonawcę i przenieś ją do `W toku`.
+2. Wklej agentowi całą kartę: tytuł, opis i listę podzadań. Agent czyta ten plik, potem pliki z „Zacznij od”, i
+   dopiero wtedy planuje zmiany; pracujesz bez agenta: czytasz to samo.
+3. Gałąź `<program>/<krótki-opis>` i PR według zasad niżej („Gałęzie i PR”) i
+   [docs/project/work-plan.md](docs/project/work-plan.md) §6; w opisie PR podaj klucz karty (np. `ALGO-19`).
+4. Przed PR uruchom polecenia z „Jak sprawdzić” i z „Testy przy każdej zmianie”.
+5. Zrobiony krok: jego podzadanie w urwisie do `Zrobione`; PR czeka na przegląd: karta w `Do przeglądu`; po scaleniu
+   ostatnie podzadanie do `Zrobione` (urwis sam zamyka kartę, gdy wszystkie podzadania są zrobione).
+6. Karta mówi co innego niż repozytorium: wygrywa repozytorium (kolejność w „Gdy dokumenty się różnią”); napisz to
+   w komentarzu na karcie albo w PR.
+
 ## Zasady
 
 - **Żadnych kluczy API ani sekretów w repozytorium**, także w testach, przykładach i logach. Klucz jest tylko

@@ -54,14 +54,16 @@ każdy moduł może powstać w innym języku.
 
 Każdy folder ma własne `README.md` z opisem, co do niego należy.
 
-Dla zespołu i agentów kodujących: zasady pracy i kolejność czytania w [AGENTS.md](AGENTS.md), przegląd projektu, plan prac i specyfikacje programów w [docs/README.md](docs/README.md).
+Dla zespołu i agentów kodujących: zasady pracy, kolejność czytania i praca z kartą z urwisa w [AGENTS.md](AGENTS.md), przegląd projektu, plan prac i specyfikacje programów w [docs/README.md](docs/README.md).
 
 ## Stan
 
-20.11.2026: projekt gotowy do pisania kodu; kodu programów jeszcze nie ma.
+20.11.2026: projekt gotowy do pisania kodu; kodu programów jeszcze nie ma. Pierwsze spotkanie zespołu odbyło się
+20.11.2026 ([notatka](docs/meetings/2026-11-20-pierwsze-spotkanie.md)); zadania zespołu są w projekcie AlgoTraceUR
+(klucz `ALGO`) w urwisie koła.
 
 - Gotowe: projekt badania i zestaw modeli ([docs/project/overview.md](docs/project/overview.md)), plan prac
-  ([docs/project/work-plan.md](docs/project/work-plan.md)), stos technologiczny i licencje
+  ([docs/project/work-plan.md](docs/project/work-plan.md)), stos technologiczny i licencje przyjęte przez zespół
   ([docs/decisions/](docs/decisions/README.md)), protokół eksperymentu w wersji „przed pilotażem”
   ([docs/protocol/](docs/protocol/README.md)), kontrakt danych v2 ([schemas/](schemas/README.md)), specyfikacje
   sześciu programów ([docs/README.md](docs/README.md)), szablon tekstu badania w LaTeX ([paper/](paper/README.md)).

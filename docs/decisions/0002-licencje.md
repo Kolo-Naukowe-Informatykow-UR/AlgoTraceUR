@@ -1,8 +1,9 @@
 # 0002 Licencje kodu, zbioru przebiegów i tekstu badania
 
-- **Status:** proponowana, 20.11.2026. Lider zaproponował ją przed pierwszym kodem i przed wkładem innych członków;
-  przyjmują ją wszyscy autorzy (zgoda w PR z plikiem `LICENSE` albo w notatce ze spotkania), wtedy status „przyjęta”
-  z datą.
+- **Status:** przyjęta, 20.11.2026. Lider zaproponował ją przed pierwszym kodem i przed wkładem innych członków;
+  zespół zgodził się na nią na pierwszym spotkaniu 20.11.2026 ([notatka](../meetings/2026-11-20-pierwsze-spotkanie.md)).
+  Plik `LICENSE` (niezmieniony tekst Apache-2.0 z `https://www.apache.org/licenses/LICENSE-2.0.txt`) jest w katalogu
+  głównym od 20.11.2026, obok `NOTICE` i sekcji „Licencja” w `README.md`.
 - **Jak ją zmienić:** nowy plik `NNNN-krotki-opis.md`, który w statusie pisze „zastępuje 0002” i podaje powód. Zmiana
   licencji części, do której wnieśli wkład inni, wymaga zgody wszystkich autorów tego wkładu (art. 9 ustawy o prawie
   autorskim), a kopie już wydane zostają na starej licencji.

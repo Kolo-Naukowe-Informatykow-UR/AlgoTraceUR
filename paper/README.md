@@ -14,22 +14,37 @@ Tekst badania w LaTeX: raport z wynikami, z którego powstanie też referat na k
 
 ## Budowanie
 
-Potrzebna dystrybucja TeX (TeX Live albo MiKTeX) z `latexmk` i `biber`; w folderze `paper/`:
+Zespół buduje PDF tak samo lokalnie i w CI: TeX Live 2026 z `latexmk` i `biber` (oba w zestawie TeX Live, razem
+z Perlem). Lokalnie w folderze `paper/`:
 
 ```
 latexmk main.tex
 ```
 
-Wynik: `build/main.pdf`. Szablon działa z pdfLaTeX (domyślnie) i LuaLaTeX (`$pdf_mode = 4;` w `.latexmkrc`). Użyte
-pakiety są w każdej pełnej dystrybucji: `babel` (polski i angielski), `csquotes`, `biblatex`, `geometry`, `microtype`,
-`amsmath`, `booktabs`, `tikz`, `listings`, `algorithm` i `algpseudocode`, `hyperref`.
+Wynik: `build/main.pdf`. Szablon działa z pdfLaTeX (domyślnie) i LuaLaTeX (`$pdf_mode = 4;` w `.latexmkrc` albo
+`latexmk -lualatex`); `latexmk -pvc` kompiluje po każdej zmianie, `latexmk -C` czyści `build/`. Użyte pakiety są
+w każdej pełnej dystrybucji: `babel` (polski i angielski), `csquotes`, `biblatex`, `geometry`, `microtype`, `amsmath`,
+`booktabs`, `tikz`, `listings`, `algorithm` i `algpseudocode`, `hyperref`.
 
-> Stan (listopad 2026): szablon nie był jeszcze kompilowany, bo przy jego pisaniu nie było pod ręką TeX; pierwsza
-> kompilacja może wymagać drobnych poprawek.
+- **TeX Live 2026 na Windows:** instalator sieciowy z https://tug.org/texlive/ (schemat pełny to kilka GB, mniejszy
+  wystarczy, jeśli zawiera pakiety z listy); `biber --version` i `latexmk --version` sprawdzają instalację. MiKTeX
+  też zadziała, ale wymaga osobnego Perla dla `latexmk`, a CI używa TeX Live. biblatex i biber muszą pochodzić z tej
+  samej dystrybucji.
+- **CI:** `.github/workflows/paper.yml` (`xu-cheng/latex-action@v4`, pełny TeX Live w kontenerze) buduje PDF przy
+  każdej zmianie `paper/` w pushu i w PR; PDF jest w artefakcie `paper-pdf` przebiegu, przy błędzie razem z
+  `main.log` i `main.blg`. Bez lokalnego TeX wystarczy PR i artefakt.
+- **Edytor:** VS Code z rozszerzeniem LaTeX Workshop (receptura latexmk, skok źródło ↔ PDF) albo TeXstudio. Overleaf
+  w planie darmowym nie ma synchronizacji z GitHubem, więc źródłem tekstu zostaje repozytorium.
+
+> Stan (20.11.2026): pierwsza budowa w CI (push na `main` 20.11.2026) zakończyła się sukcesem, PDF jest
+> w artefakcie `paper-pdf`; ostrzeżenia z `main.log` i `main.blg` czekają na przegląd, a lokalnie szablonu jeszcze
+> nikt nie kompilował.
 
 ## Zasady
 
-- Język główny ustawia jedna opcja w `main.tex` (`main=polish` albo `main=english`); streszczenia są w obu językach.
+- Tekst jest po angielsku (`main=english` w `main.tex`, decyzja zespołu z 20.11.2026), streszczenie także po polsku.
+  Struktura tekstu i wybrana konferencja: [docs/knowledge/paper-and-conferences.md](../docs/knowledge/paper-and-conferences.md),
+  literatura do rozdziału 1: [docs/knowledge/literature.md](../docs/knowledge/literature.md).
 - Cytowania przez `\cite{klucz}` z `references.bib`; każda praca sprawdzona w źródle pierwotnym.
 - Liczby i wykresy wyników pochodzą ze skryptów analizy, nie są przepisywane ręcznie.
 - Miejsca do napisania: `\TODO{...}`.

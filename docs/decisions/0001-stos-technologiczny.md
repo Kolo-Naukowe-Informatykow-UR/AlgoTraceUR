@@ -1,7 +1,7 @@
 # 0001 Stos technologiczny modułów
 
-- **Status:** przyjęta robocza, 20.11.2026. Lider przyjął ją, zanim zespół zaczął kod, żeby pierwsze zadania nie
-  czekały; zespół może ją zmienić, np. na pierwszym spotkaniu.
+- **Status:** przyjęta, 20.11.2026. Lider przyjął ją roboczo, zanim zespół zaczął kod, a zespół przyjął ją na
+  pierwszym spotkaniu 20.11.2026 ([notatka](../meetings/2026-11-20-pierwsze-spotkanie.md)).
 - **Jak ją zmienić:** nowy plik `NNNN-krotki-opis.md`, który w statusie pisze „zastępuje 0001” i podaje powód. Ten plik
   dostaje wtedy status „zastąpiona przez NNNN” i poza tym się nie zmienia. Nowszą wersję tej samej biblioteki
   wprowadza plik blokady, bez nowego zapisu; inna biblioteka, inny język albo inny serwer modeli lokalnych wymaga
